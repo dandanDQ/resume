@@ -9,15 +9,22 @@ export default {
   name: 'Editor',
   mounted() {
     monaco.editor.create(document.getElementById('container'), {
-      value: "function hello() {\n\talert('Hello world!');\n}",
-      language: 'javascript'
+      value: 
+      `姓名: 沈丹琼
+城市: 苏州`,
+      	language: 'yaml',
+        lineNumbers: 'on',
+        roundedSelection: false,
+        scrollBeyondLastLine: false,
+        readOnly: false,
+        theme: 'vs-dark'
     });
   }
 }
 </script>
 <style lang="scss">
   .editor {
-    width: 800px;
-    height: 400px;
+    height: 96vh;
+    border-radius: 4px;
   }
 </style>
