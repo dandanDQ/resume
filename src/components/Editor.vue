@@ -1,5 +1,5 @@
 <template>
-  <div class="editor" style="height: 400px">
+  <div class="editor">
     <div id="container" style="height: 100%"></div>
   </div>
 </template>
@@ -15,3 +15,9 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+  .editor {
+    width: 800px;
+    height: 400px;
+  }
+</style>
