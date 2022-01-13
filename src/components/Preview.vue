@@ -1,6 +1,8 @@
 <template>
   <div class="preview">
-    <div class="content">preview 预览</div>
+    <div class="content">
+      
+    </div>
     <div class="list">切换预览列表</div>
     <div class="btn">列表</div>
   </div>
@@ -15,3 +17,7 @@ export default {
   }
 }
 </script>
+<style>
+.preview {
+}
+</style>

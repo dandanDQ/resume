@@ -1,6 +1,8 @@
 <template>
   <article class="resume">
     <section>
+      <Title />
+      <div v-for="editor in editorList" :key="editor.idx"></div>
       <Editor />
     </section>
     <section>
@@ -11,22 +13,24 @@
 <script>
 import Editor from '../components/Editor.vue'
 import Preview from '../components/Preview.vue'
-
+import Title from '../components/Title.vue'
 export default {
   name: 'Resume',
   components: {
     Editor,
-    Preview
+    Preview,
+    Title
   },
   data() {
     return {
+      editorList: [{idx: 0, resume: ''}]
     }
   }
 }
 </script>
 <style scoped lang="scss">
+
 article.resume {
-  height: 96vh;
   border: 1px solid grey;
   border-radius: 4px;
   box-sizing: border-box;
