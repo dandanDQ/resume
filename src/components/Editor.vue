@@ -23,6 +23,10 @@ export default {
       default() {
         return {}
       }
+    },
+    saveFlag: {
+      type: Boolean,
+      default: true
     }
   },
   watch: {
@@ -38,28 +42,27 @@ export default {
           this.setValue(newVal)
         }
       }
+    },
+    saveFlag: {
+      handler() {
+        this.getValue(this.current)
+      }
     }
   },
   mounted() {
     this.editor = monaco.editor.create(document.getElementById('container'), {
-      value: 
-`项目: iLabel
-
-队列:
-- 拉黑解脱队列: 1266
-- 私信队列: 1344`,
-      	language: 'yaml',
-        lineNumbers: 'on',
-        roundedSelection: false,
-        scrollBeyondLastLine: false,
-        readOnly: false,
-        theme: 'vs-dark',
-        formatOnPaste: true,
-        automaticLayout: true,
-        wordWrap: 'on',
+      value: '',
+      language: 'yaml',
+      lineNumbers: 'on',
+      roundedSelection: false,
+      scrollBeyondLastLine: false,
+      readOnly: false,
+      theme: 'vs-dark',
+      formatOnPaste: true,
+      automaticLayout: true,
+      wordWrap: 'on',
     });
     window.addEventListener('resize', () => {
-      console.log('触发resize')
       toRaw(this.editor).layout()
     })
   },
@@ -68,7 +71,7 @@ export default {
       if(obj) {
         // not a empty object
         obj.yaml = toRaw(this.editor).getValue()
-        obj.preview = yaml.load(obj.yaml)
+        obj.preview = yaml.load(obj.yaml) ?? {}
       }
     },
     setValue(obj) {

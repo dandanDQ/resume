@@ -18,6 +18,9 @@
     <div class="ui-button" @click="changeEditorList('delete')">
       <img src="../assets/delete.svg"/>
     </div>
+    <div class="ui-button" @click="getEditorValue">
+      <img src="../assets/icon_resume.svg"/>
+    </div>
   </div>
 </template>
 <script>
@@ -26,6 +29,9 @@ export default {
   methods: {
     changeEditorList(editor) {
       this.$emit('change-editor-list', editor)
+    },
+    getEditorValue() {
+      this.$emit('get-editor-value')
     }
   },
   props: {

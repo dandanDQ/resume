@@ -4,9 +4,10 @@
       <title />
       <tool-bar 
         @change-editor-list="changeEditorList"
+        @get-editor-value="getEditorValue"
         :editorList="editorList"
         :current="current"/>
-      <editor :current="current"/>
+      <editor :current="current" :saveFlag="saveFlag"/>
     </section>
     <section>
       <preview :current="current"/>
@@ -31,10 +32,21 @@ export default {
       editorList: [{ yaml: '预设1', preview: {}}, { yaml: '预设2', preview: {}} ],
       current: null,
       capacity: 6,
+      saveFlag: true
     }
   },
-  created() {
+  created() { 
+    const initVal = JSON.stringify([{ yaml: '预设1', preview: {}}, { yaml: '预设2', preview: {}} ])
+    const editorString = window.localStorage.getItem('editorList') ?? initVal
+    this.editorList = JSON.parse(editorString)
+    window.addEventListener('beforeunload', (e) => {
+      window.localStorage.setItem('editorList', JSON.stringify(this.editorList))
+    })
+
     this.current = this.editorList[0]
+  },
+  mounted() {
+  
   },
   methods: {
     changeEditorList(editor) {
@@ -63,6 +75,9 @@ export default {
           this.current = editor
         }
       }
+    },
+    getEditorValue() {
+      this.saveFlag = !this.saveFlag
     }
   }
 }
