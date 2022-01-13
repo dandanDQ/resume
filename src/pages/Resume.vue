@@ -1,12 +1,15 @@
 <template>
   <article class="resume">
     <section>
-      <Title />
-      <div v-for="editor in editorList" :key="editor.idx"></div>
-      <Editor />
+      <title />
+      <tool-bar 
+        @change-editor-list="changeEditorList"
+        :editorList="editorList"
+        :current="current"/>
+      <editor :current="current"/>
     </section>
     <section>
-      <Preview />
+      <preview :current="current"/>
     </section>
   </article>
 </template>
@@ -14,16 +17,52 @@
 import Editor from '../components/Editor.vue'
 import Preview from '../components/Preview.vue'
 import Title from '../components/Title.vue'
+import ToolBar from '../components/ToolBar.vue'
 export default {
   name: 'Resume',
   components: {
     Editor,
     Preview,
-    Title
+    Title,
+    ToolBar
   },
   data() {
     return {
-      editorList: [{idx: 0, resume: ''}]
+      editorList: [{ yaml: '预设1', preview: {}}, { yaml: '预设2', preview: {}} ],
+      current: null,
+      capacity: 6,
+    }
+  },
+  created() {
+    this.current = this.editorList[0]
+  },
+  methods: {
+    changeEditorList(editor) {
+      switch(editor) {
+        case 'next' : {
+          if(this.editorList.length <= 1)  break;
+          const idx = (this.editorList.indexOf(this.current) + 1) % this.editorList.length
+          this.current = this.editorList[idx]
+          break;
+        }
+        case 'add' : {
+          if(this.editorList.length >= this.capacity) break;
+          this.editorList.push({ yaml: '', preview: {}})
+          this.current = this.editorList[this.editorList.length - 1]
+          break;
+        }
+        case 'delete' : {
+          if(this.editorList.length <= 1)  break;
+          const delIdx = this.editorList.indexOf(this.current)
+          this.editorList.splice(delIdx, 1)
+          const idx = (delIdx + this.editorList.length) % this.editorList.length
+          this.current = this.editorList[idx]
+          break;
+        }
+        default: {
+          this.current = editor
+        }
+      }
     }
   }
 }

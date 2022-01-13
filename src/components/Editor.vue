@@ -1,7 +1,5 @@
 <template>
   <div class="editor">
-    {{ yaml }}
-    <div @click="handleClick" class="ui-button">生成</div>
     <div id="container"></div>
   </div>
 </template>
@@ -17,6 +15,29 @@ export default {
       editor: null,
       value: '',
       yaml: null
+    }
+  },
+  props: {
+    current: {
+      type: Object,
+      default() {
+        return {}
+      }
+    }
+  },
+  watch: {
+    current: {
+      handler(newVal, oldVal) {
+        // auto save data before change
+        if(oldVal) {
+          // save data to old object
+          this.getValue(oldVal)
+        }
+        if(newVal) {
+          // load object to the editorList
+          this.setValue(newVal)
+        }
+      }
     }
   },
   mounted() {
@@ -43,11 +64,16 @@ export default {
     })
   },
   methods: {
-    handleClick() {
-      this.value = toRaw(this.editor).getValue()
-      this.yaml = yaml.load(this.value)
+    getValue(obj) {
+      if(obj) {
+        // not a empty object
+        obj.yaml = toRaw(this.editor).getValue()
+        obj.preview = yaml.load(obj.yaml)
+      }
     },
-
+    setValue(obj) {
+      toRaw(this.editor).setValue(obj.yaml)
+    }
   }
 }
 </script>

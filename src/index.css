@@ -1,4 +1,4 @@
-#app {
+body {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -7,6 +7,7 @@
   padding: 0;
   background: #131417;
   color: white;
+  padding: 10px;
 }
 
 .ui-button {
@@ -24,6 +25,7 @@
   text-align: center;
   padding: 4px 16px;
   cursor: pointer;
+  user-select: none;
 }
 
 .ui-button:hover {
