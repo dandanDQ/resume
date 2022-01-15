@@ -25,10 +25,8 @@
               </div>
             </div>
           </div>
-
         </section>
       </article>
-
     </div>
     <div class="btn"></div>
   </div>
@@ -36,7 +34,6 @@
 <script>
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
-
 
 export default {
   name: 'Preview',
@@ -51,6 +48,11 @@ export default {
       handler(newVal) {
         this.loadData(newVal)
       }
+    },
+    exportFlag: {
+      handler() {
+        this.onExport()
+      }
     }
   },
   computed: {
@@ -64,6 +66,10 @@ export default {
       default() {
         return {}
       }
+    },
+    exportFlag: {
+      type: Boolean,
+      default: true
     }
   },
   methods: {

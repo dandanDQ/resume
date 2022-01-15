@@ -19,7 +19,7 @@
       <img src="../assets/delete.svg"/>
     </div>
     <div class="ui-button" @click="getEditorValue">
-      <img src="../assets/icon_resume.svg"/>
+      <img src="../assets/save.svg"/>
     </div>
     <div class="ui-button" @click="exportPreview">
       <img src="../assets/pdf_export.svg"/>

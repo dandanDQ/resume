@@ -4,14 +4,14 @@
       <title />
       <tool-bar 
         @change-editor-list="changeEditorList"
-        @get-editor-value="getEditorValue"
-        @export-preview="exportPreview"
+        @get-editor-value="saveFlag = !saveFlag"
+        @export-preview="exportFlag = !exportFlag"
         :editorList="editorList"
         :current="current"/>
       <editor :current="current" :saveFlag="saveFlag"/>
     </section>
     <section>
-      <preview :current="current"/>
+      <preview :current="current" :exportFlag="exportFlag"/>
     </section>
   </article>
 </template>
@@ -77,9 +77,6 @@ export default {
           this.current = editor
         }
       }
-    },
-    getEditorValue() {
-      this.saveFlag = !this.saveFlag
     },
   }
 }
