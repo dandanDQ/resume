@@ -42,14 +42,13 @@ export default {
   name: 'Preview',
   data() {
     return {
-      firstLevel: []
+      firstLevels: []
     }
   },
   watch: {
     'current.preview': {
       immediate: true,
       handler(newVal) {
-        console.log(newVal)
         this.loadData(newVal)
       }
     }
@@ -93,7 +92,6 @@ export default {
 .preview {
   width: 210mm;
   height: 297mm;
-  border: 2px grey solid;
   background-color: white;
   color: #555;
   border-radius: 4px;

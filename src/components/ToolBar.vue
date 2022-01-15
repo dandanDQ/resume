@@ -21,6 +21,10 @@
     <div class="ui-button" @click="getEditorValue">
       <img src="../assets/icon_resume.svg"/>
     </div>
+    <div class="ui-button" @click="exportPreview">
+      <img src="../assets/pdf_export.svg"/>
+    </div>
+    
   </div>
 </template>
 <script>
@@ -32,6 +36,9 @@ export default {
     },
     getEditorValue() {
       this.$emit('get-editor-value')
+    },
+    exportPreview() {
+      this.$emit('export-preview')
     }
   },
   props: {

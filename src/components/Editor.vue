@@ -45,6 +45,7 @@ export default {
     },
     saveFlag: {
       handler() {
+        console.log('这为什么没有生效啊')
         this.getValue(this.current)
       }
     }

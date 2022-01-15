@@ -5,6 +5,7 @@
       <tool-bar 
         @change-editor-list="changeEditorList"
         @get-editor-value="getEditorValue"
+        @export-preview="exportPreview"
         :editorList="editorList"
         :current="current"/>
       <editor :current="current" :saveFlag="saveFlag"/>
@@ -32,7 +33,8 @@ export default {
       editorList: [{ yaml: '预设1', preview: {}}, { yaml: '预设2', preview: {}} ],
       current: null,
       capacity: 6,
-      saveFlag: true
+      saveFlag: true,
+      exportFlag: true
     }
   },
   created() { 
@@ -78,7 +80,7 @@ export default {
     },
     getEditorValue() {
       this.saveFlag = !this.saveFlag
-    }
+    },
   }
 }
 </script>
