@@ -52,7 +52,7 @@ export default {
 </script>
 <style scoped lang="scss">
 .tool-bar {
-  margin: 10px 0;
+  margin-bottom: 10px;
   .highlight {
     border: #ffdd40 1px solid;
   }

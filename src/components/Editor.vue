@@ -51,7 +51,7 @@ export default {
   },
   mounted() {
     this.editor = monaco.editor.create(document.getElementById('container'), {
-      value: '',
+      value: this.current.yaml,
       language: 'yaml',
       lineNumbers: 'on',
       roundedSelection: false,
@@ -70,8 +70,14 @@ export default {
     getValue(obj) {
       if(obj) {
         // not a empty object
-        obj.yaml = toRaw(this.editor).getValue()
-        obj.preview = yaml.load(obj.yaml) ?? {}
+        try {
+          obj.yaml = toRaw(this.editor).getValue()
+          obj.preview = yaml.load(obj.yaml) ?? {}
+        } catch(err) {
+          console.log(err)
+          obj.preview = {}
+        }
+        
       }
     },
     setValue(obj) {
@@ -83,6 +89,7 @@ export default {
 <style lang="scss">
   .editor {
     border-radius: 4px;
+    height: 1000px;
     .btn {
       border: 1px solid rgb(137, 137, 238);
       border-radius: 4px;
@@ -91,8 +98,8 @@ export default {
       cursor: pointer;
     }
     #container {
-      width: 50vw;
-      height: 600px;
+      width: 100%;
+      height: 100%;
     }
   }
 </style>

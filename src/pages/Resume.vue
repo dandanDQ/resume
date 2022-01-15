@@ -83,15 +83,16 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-
 article.resume {
   border: 1px solid grey;
   border-radius: 4px;
   box-sizing: border-box;
   display: grid;
-  margin: 0;
-  padding: 0;
-  grid-template-columns: repeat(2, 1fr);
-  align-items: center;
+  margin: 10px auto;
+  padding: 10px;
+  grid-template-columns: minmax(300px, calc(95vw - 210mm)) 210mm;
+  grid-gap: 10px;
+  width: 95vw;
+  min-width: calc(300px + 220mm);
 }
 </style>
