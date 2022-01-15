@@ -1,6 +1,7 @@
 <template>
-  <div class="preview">
-    <div class="test" style="color: red">{{ preview }}</div>
+  <div class="preview" id="resume-preview">
+    <!-- <div class="test" style="color: red">{{ preview }}</div> -->
+    <div class="ui-button" @click="onExport">导出</div>
     <div class="content">
       <article class="first-levels">
         <section class="first-level" v-for="(firstLevel, firstTitle) in firstLevels" :key="firstTitle">
@@ -33,6 +34,10 @@
   </div>
 </template>
 <script>
+import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas";
+
+
 export default {
   name: 'Preview',
   data() {
@@ -71,6 +76,15 @@ export default {
           this.firstLevels[key] = preview[key]
         }
       }
+    },
+    onExport() {
+      const el = document.querySelector('#resume-preview')
+      html2canvas(el).then((canvas) => {
+        const  pageData = canvas.toDataURL("image/jpeg", 1.0);
+        const pdf = new jsPDF();
+        pdf.addImage(pageData, "JPEG", 0, 0, 210, 297);
+        pdf.save("a4.pdf");
+      })
     }
   }
 }
