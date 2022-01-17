@@ -1,7 +1,6 @@
 <template>
   <div class="preview" id="resume-preview">
     <!-- <div class="test" style="color: red">{{ preview }}</div> -->
-    <div class="ui-button" @click="onExport">导出</div>
     <div class="content">
       <article class="first-levels">
         <section class="first-level" v-for="(firstLevel, firstTitle) in firstLevels" :key="firstTitle">
@@ -114,6 +113,7 @@ export default {
       border-radius: 8px;
       box-shadow: 0px 0px 3px 0px #5698c3;
       margin: 20px 0;
+
       .first-title {
         font-size: 16px;
         font-weight: 600;

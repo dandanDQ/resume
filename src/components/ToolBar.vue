@@ -1,6 +1,5 @@
 <template>
   <div class="tool-bar">
-    
     <div 
       class="ui-button" 
       v-for="editor in editorList" 
@@ -59,9 +58,11 @@ export default {
 </script>
 <style scoped lang="scss">
 .tool-bar {
-  margin-bottom: 10px;
   .highlight {
     border: #ffdd40 1px solid;
+  }
+  div {
+    margin-bottom: 10px;
   }
 }
 </style>
