@@ -2,12 +2,12 @@
   <div class="preview" id="resume-preview">
     <!-- <div class="test" style="color: red">{{ preview }}</div> -->
     <div class="content">
-      <div class="base-info">
+      <article class="left-col">
         <div class="photo">
           <div @click="uploadPhoto" class="photo-content"></div>
           <input type="file" id="photo-upload">
         </div>
-        <div class="name" v-if="name"> {{name}}</div>
+        <div class="name" v-if="name">{{name}}</div>
 
         <div class="contact-list">
           <div v-if="contact.wechat" class="contact-item">
@@ -27,9 +27,9 @@
             <div>{{contact.github}}</div>
           </div>
         </div>
-      </div>
+      </article>
       <!-- cards of first level. -->
-      <article class="first-levels">
+      <article class="right-col">
         <section class="first-level" v-for="(firstLevel, firstTitle) in firstLevels" :key="firstTitle">
           <div class="first-title">
             <div>{{firstTitle}}</div>
@@ -53,7 +53,6 @@
         </section>
       </article>
     </div>
-    <div class="btn"></div>
   </div>
 </template>
 <script>
@@ -134,11 +133,23 @@ export default {
   font-family: 'font1';
   src: url(../assets/re-font.TTF);
 }
+@font-face {
+  font-family: 'dq-font';
+  src: url(../assets/ShangShou.ttf) format('truetype')
+}
+@font-face {
+  font-family: 'dq-fangtang';
+  src: url(../assets/fangtang.ttf) format('truetype')
+}
+@font-face {
+  font-family: 'dq-guofengran';
+  src: url(../assets/guofengran.ttf) format('truetype')
+}
 .preview {
   width: 210mm;
   height: 297mm;
   background-color: white;
-  color: rgb(255, 255, 255);
+  color: #555;
   border-radius: 4px;
   font-size: 14px;
   // padding: 30px;
@@ -147,22 +158,32 @@ export default {
   font-family:"微软雅黑";
   line-height: 24px;
   .content {
-    display: flex;
-    flex-direction: column;
     height: 100%;
-    .base-info {
-      display: flex;
-      justify-content: space-between;
-      background: #5580A0;
+    display: grid;
+    grid-template-columns: 32% 66%;
+    padding: 20px;
+    box-sizing: border-box;
+    grid-gap: 2%;
+    .left-col {
+      // background: #5580A0;
       backdrop-filter: blur(10px);
-      padding: 30px;
+      border: 1px rgba(112, 161, 255,1.0) solid;
+      box-shadow: 1px 1px 3px rgb(112, 161, 255);
+      background-color: rgba(112, 161, 255, 0.5);
+      border-radius: 5px;
       // color: white;
       .name {
         font-size: 40px;
-        font-family: 'font1';
-        line-height: 40px;
+        line-height: 30px;
+        font-family: 'dq-fangtang';
+        text-align: center;
+        vertical-align: middle;
+        padding: 16px 8px;
+        color: #2f3542;
+        background-color: rgba(255, 165, 2,1.0);
       }
       .contact-list {
+        margin: 10px 5px;
         .contact-item {
           display: flex;
           .logo {
@@ -185,23 +206,24 @@ export default {
 
     }
 
-    .first-levels {
+    .right-col {
       flex: 1;
-      background-color: #cc8a4d;
+      // background-color: #cc8a4d;
       height: 100%;
-      padding: 30px;
       .first-level {
         padding: 10px;
         // border: 1px solid #5698c3;
+        margin-bottom: 10px;
         border-radius: 8px;
-        box-shadow: 0px 0px 3px 0px black;
-        margin: 20px 0;
+        border:1px solid rgba(130, 88, 159, 0.8);
+        box-shadow: 2px 2px 2px rgb(130, 88, 159);
 
         .first-title {
-          font-size: 16px;
-          font-weight: 600;
-          margin-bottom: 6px;
-          border-bottom: 1px dashed #cc8a4d;
+          font-family: 'dq-font';
+          font-size: 18px;
+          line-height: 18px;
+          text-shadow: 0.1em 0.1em 0.05em rgba(153,153,153,0.6);
+          vertical-align: middle;
         }
 
         .second-level {
