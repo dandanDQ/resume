@@ -4,8 +4,10 @@
     <div class="content">
       <article class="left-col">
         <div class="photo">
-          <div @click="uploadPhoto" class="photo-content"></div>
-          <input type="file" id="photo-upload">
+          <div @click="uploadPhoto" class="photo-content">
+            <img src="" alt="" id="upload-img">
+          </div>
+          <input type="file" id="upload-input" accept="image/*" @change="loadImg">
         </div>
         <div class="name" v-if="name">{{name}}</div>
 
@@ -121,9 +123,20 @@ export default {
       })
     },
     uploadPhoto() {
-      const upload = document.querySelector('#photo-upload')
-      console.log('upload EL', upload)
+      const upload = document.querySelector('#upload-input')
       upload.click()
+    },
+    loadImg() {
+      const imgFile = document.querySelector('#upload-input')?.files[0]
+      const reader = new FileReader()
+      reader.readAsDataURL(imgFile)
+      reader.onload = function() {
+        const img = document.querySelector('#upload-img')
+        img.setAttribute("src", reader.result)
+        img.style.width = '26mm'
+        img.style.height = '32mm'
+        img.style['object-fit'] = 'cover'
+      }
     }
   }
 }
@@ -155,8 +168,8 @@ export default {
   // padding: 30px;
   box-sizing: border-box;
   box-shadow: 0px 0px 1px 1px black;
-  font-family:"微软雅黑";
-  line-height: 24px;
+  line-height: 22px;
+  font-family: 'dq-guofengran';
   .content {
     height: 100%;
     display: grid;
@@ -184,6 +197,7 @@ export default {
       }
       .contact-list {
         margin: 10px 5px;
+        font-size: 12px;
         .contact-item {
           display: flex;
           .logo {
@@ -193,13 +207,16 @@ export default {
         }
       }
       .photo {
+        display: flex;
+        justify-content: center;
+        margin: 10px;
         .photo-content {
           width: 26mm;
           height: 32mm;
           border: solid 1px grey;
           border-radius: 4px;
         }
-        #photo-upload {
+        #upload-input {
           display: none;
         }
       }
@@ -221,7 +238,7 @@ export default {
         .first-title {
           font-family: 'dq-font';
           font-size: 18px;
-          line-height: 18px;
+          line-height: 24px;
           text-shadow: 0.1em 0.1em 0.05em rgba(153,153,153,0.6);
           vertical-align: middle;
         }
@@ -232,7 +249,7 @@ export default {
             .desc {
               display: flex;
               .key-desc {
-                flex: 0 0 120px;
+                flex: 0 0 70px;
               }
               .sub-desc {
               }
