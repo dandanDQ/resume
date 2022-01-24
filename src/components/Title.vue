@@ -3,13 +3,13 @@
 </template>
 <script>
 export default {
-  name: 'Title'
-}
+  name: 'ResumeTitle',
+};
 </script>
 <style scoped lang="scss">
 @font-face {
   font-family: 'resume-font';
-  src: url('../assets/FZSJ-MIAOMM.TTF')
+  src: url('../assets/FZSJ-MIAOMM.TTF');
 }
 .title {
   font-family: resume-font;
