@@ -12,7 +12,6 @@ module.exports = {
   rules: {
     'no-console': 'off', // ++
     'prettier/prettier': 'error',
-    'prefer-nullish-coalescing': 'warn',
   },
   plugins: ['prettier'], // ++
   extends: [
