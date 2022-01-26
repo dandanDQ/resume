@@ -180,7 +180,7 @@ export default {
     .left-col {
       // background: #5580A0;
       backdrop-filter: blur(10px);
-      border: 1px rgba(112, 161, 255,1.0) solid;
+      // border: 1px rgba(112, 161, 255,1.0) solid;
       box-shadow: 1px 1px 3px rgb(112, 161, 255);
       background-color: rgba(112, 161, 255, 0.5);
       border-radius: 5px;
@@ -193,7 +193,7 @@ export default {
         vertical-align: middle;
         padding: 16px 8px;
         color: #2f3542;
-        background-color: rgba(255, 165, 2,1.0);
+        background-color: rgba(255, 165, 2, 1.0);
       }
       .contact-list {
         margin: 10px 5px;
@@ -213,8 +213,9 @@ export default {
         .photo-content {
           width: 26mm;
           height: 32mm;
-          border: solid 1px grey;
+          border: dashed 1px grey;
           border-radius: 4px;
+          cursor: pointer;
         }
         #upload-input {
           display: none;
@@ -232,8 +233,8 @@ export default {
         // border: 1px solid #5698c3;
         margin-bottom: 10px;
         border-radius: 8px;
-        border:1px solid rgba(130, 88, 159, 0.8);
-        box-shadow: 2px 2px 2px rgb(130, 88, 159);
+        border:1px solid rgba(112, 161, 255, 0.6);
+        box-shadow: 2px 2px 2px rgba(112, 161, 255, 0.5);
 
         .first-title {
           font-family: 'dq-font';
