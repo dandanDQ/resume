@@ -61,7 +61,26 @@ export default {
         }
         case 'add' : {
           if(this.editorList.length >= this.capacity) break;
-          this.editorList.push({ yaml: '', preview: {}})
+          this.editorList.push({ yaml: 
+`name: 填名字
+contact:
+  phone: 填电话
+  email: 填邮箱
+  wechat: 填微信
+  github: 填github
+
+FL-xx经历（识别开头是FL-的）:
+- name: 大标题
+  time: 时间时间时间
+  desc:
+   - 描述1: xxx
+   - 描述2: xxx
+- name: 大标题
+  time: 时间时间时间
+  desc:
+   - 描述1: xxx
+   - 描述2: xxx
+   - 说明: 只有英文key是固定的`, preview: {}})
           this.current = this.editorList[this.editorList.length - 1]
           break;
         }
