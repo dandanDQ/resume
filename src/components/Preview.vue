@@ -29,6 +29,14 @@
             <div>{{contact.github}}</div>
           </div>
         </div>
+
+        <div class="skills-block" v-if="skills.length">              
+          <div class="skills">
+              <span class="skill" v-for="skill in skills" :key="skill.name" :style="{'--percentage': skill.level+'%'}" >
+                  <span class="skill-name">{{skill.name}}</span>
+              </span>
+          </div>
+        </div>
       </article>
       <!-- cards of first level. -->
       <article class="right-col">
@@ -90,6 +98,9 @@ export default {
     },
     contact() {
       return this.current?.preview?.contact ?? []
+    },
+    skills() {
+      return this.current?.preview?.skills ?? []
     }
   },
   props: {
@@ -179,11 +190,14 @@ export default {
     grid-gap: 2%;
     .left-col {
       // background: #5580A0;
+      box-sizing: border-box;
       backdrop-filter: blur(10px);
       // border: 1px rgba(112, 161, 255,1.0) solid;
       box-shadow: 1px 1px 3px rgb(112, 161, 255);
       background-color: rgba(112, 161, 255, 0.5);
       border-radius: 5px;
+      display: flex;
+      flex-direction: column;
       // color: white;
       .name {
         font-size: 40px;
@@ -222,6 +236,48 @@ export default {
         }
       }
 
+      .skills-block {
+        align-self: center;
+        margin-top:20px;
+        width: 240px;
+        .skills {
+          width: 240px;
+          position:relative;
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          justify-items: center;
+
+          .skill {
+            width:85%;
+            height: 20px;
+            border-radius:4px;
+            position:relative;
+            border:#fed330 1px solid;
+            box-shadow: 1px 1px 3px #fed330;
+            margin:4px;
+            float:left;
+            font-weight: 400;
+            .skill-name {
+              text-align:center;
+              position:absolute;
+              top:50%;
+              transform:translateY(-50%);
+              width:100%;
+              font-size: 14px;
+              color: rgba(19, 15, 64,1.0);
+              font-weight: 500;
+            }
+          }
+          .skill::before{
+            content:'';
+            background-color: rgba(156, 136, 255,0.3);
+            clip-path: polygon(0 0,var(--percentage) 0, var(--percentage) 100%,0 100%);
+            display: block;
+            width: 80px;
+            height: 20px;
+          }
+        }
+      }
     }
 
     .right-col {
