@@ -244,7 +244,7 @@ export default {
           width: 240px;
           position:relative;
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: repeat(1, 1fr);
           justify-items: center;
 
           .skill {
@@ -284,10 +284,12 @@ export default {
       flex: 1;
       // background-color: #cc8a4d;
       height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       .first-level {
         padding: 10px;
         // border: 1px solid #5698c3;
-        margin-bottom: 10px;
         border-radius: 8px;
         border:1px solid rgba(112, 161, 255, 0.6);
         box-shadow: 2px 2px 2px rgba(112, 161, 255, 0.5);
