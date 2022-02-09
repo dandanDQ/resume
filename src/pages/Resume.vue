@@ -20,6 +20,73 @@ import Editor from '../components/Editor.vue'
 import Preview from '../components/Preview.vue'
 import Title from '../components/Title.vue'
 import ToolBar from '../components/ToolBar.vue'
+
+
+const defaulVal = `name: 填名字
+
+infos: 
+  - xxx: xxx
+  - xxx: xxx
+
+contact:
+  phone: 填电话
+  email: 填邮箱
+  wechat: 填微信
+  github: 填github
+
+skills:
+- name: JavaScript
+  level: 75
+- name: HTML5
+  level: 75
+- name: CSS3
+  level: 80
+- name: Vue 2.x
+  level: 75
+- name: ReactNative
+  level: 50
+- name: Webpack
+  level: 65
+
+FL-xx经历（识别开头是FL-的）:
+- name: 大标题
+  time: 时间时间时间
+  desc:
+   - 描述1: xxx
+   - 描述2: xxx
+- name: 大标题
+  time: 时间时间时间
+  desc:
+   - 描述1: xxx
+   - 描述2: 描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2描述2
+   - 说明: 只有英文key是固定的
+
+FL-xx经历2（可以随便添加）:
+- name: 大标题
+  time: 时间时间时间
+  desc:
+   - 描述1: xxx
+   - 描述2: xxx
+- name: 大标题
+  time: 时间时间时间
+  desc:
+   - 描述1: 描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1
+   - 描述2: xxx
+   - 说明: 只有英文key是固定的
+
+FL-xx经历3（可以随便添加）:
+- name: 大标题
+  time: 时间时间时间
+  desc:
+   - 描述1: 描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1描述1
+   - 描述2: xxx
+- name: 大标题
+  time: 时间时间时间
+  desc:
+   - 描述1: xxx
+   - 描述2: xxx
+   - 说明: 只有英文key是固定的`
+
 export default {
   name: 'Resume',
   components: {
@@ -38,7 +105,7 @@ export default {
     }
   },
   created() { 
-    const initVal = JSON.stringify([{ yaml: '预设1', preview: {}}, { yaml: '预设2', preview: {}} ])
+    const initVal = JSON.stringify([{ yaml: defaulVal, preview: {}}, { yaml: defaulVal, preview: {}} ])
     const editorString = window.localStorage.getItem('editorList') ?? initVal
     this.editorList = JSON.parse(editorString)
     window.addEventListener('beforeunload', (e) => {
@@ -61,26 +128,7 @@ export default {
         }
         case 'add' : {
           if(this.editorList.length >= this.capacity) break;
-          this.editorList.push({ yaml: 
-`name: 填名字
-contact:
-  phone: 填电话
-  email: 填邮箱
-  wechat: 填微信
-  github: 填github
-
-FL-xx经历（识别开头是FL-的）:
-- name: 大标题
-  time: 时间时间时间
-  desc:
-   - 描述1: xxx
-   - 描述2: xxx
-- name: 大标题
-  time: 时间时间时间
-  desc:
-   - 描述1: xxx
-   - 描述2: xxx
-   - 说明: 只有英文key是固定的`, preview: {}})
+          this.editorList.push({ yaml: defaulVal, preview: {}})
           this.current = this.editorList[this.editorList.length - 1]
           break;
         }
