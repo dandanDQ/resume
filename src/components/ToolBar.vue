@@ -44,6 +44,13 @@ export default {
     },
   },
   emits: ['change-editor-list', 'get-editor-value', 'export-preview'],
+  mounted() {
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        this.getEditorValue();
+      }
+    });
+  },
   methods: {
     changeEditorList(editor) {
       this.$emit('change-editor-list', editor);

@@ -11,7 +11,18 @@
         </div>
         <div class="name" v-if="name">{{name}}</div>
 
+        <div class="infos-list" v-if="infos.length">
+          <div class="title">基本信息</div>
+          <div v-for="(info, idx) in infos" :key="idx" class="base-info">
+            <div v-if="typeof info === 'object'">
+              <div v-for="(val,key) in  info" :key="key">{{key}}: {{val}}</div>
+            </div>
+            <div v-else>{{info}}</div>
+          </div>
+        </div>
+
         <div class="contact-list">
+          <div class="title">联系方式</div>
           <div v-if="contact.wechat" class="contact-item">
             <img src="../assets/wechat.svg" alt="" class="logo"> 
             <div>{{contact.wechat}}</div>
@@ -26,7 +37,16 @@
           </div>
           <div v-if="contact.github" class="contact-item">
             <img src="../assets/github.svg" alt="" class="logo"> 
-            <div>{{contact.github}}</div>
+            <a :href="contact.github" target="_blank">{{contact.github}}</a>
+          </div>
+        </div>
+
+        <div class="skills-block" v-if="skills.length">    
+          <div class="title">技能概要</div>          
+          <div class="skills">
+              <span class="skill" v-for="skill in skills" :key="skill.name" :style="{'--percentage': skill.level+'%'}" >
+                  <span class="skill-name">{{skill.name}}</span>
+              </span>
           </div>
         </div>
       </article>
@@ -46,7 +66,12 @@
                 <div v-for="(subdesc, key) in desc" :key="key" class="desc">
                   <div class="key-desc">{{ key }}</div>
                   <div class="sub-desc"> 
-                    {{subdesc}}
+                    <div v-if="typeof subdesc === 'object'">
+                       <div v-for="sub in subdesc" :key="sub">{{sub}}</div>
+                    </div>
+                    <div v-else>
+                      {{subdesc}} 
+                    </div>
                   </div>
                 </div>
               </div>
@@ -90,6 +115,12 @@ export default {
     },
     contact() {
       return this.current?.preview?.contact ?? []
+    },
+    skills() {
+      return this.current?.preview?.skills ?? []
+    },
+    infos() {
+      return this.current?.preview?.infos ?? []
     }
   },
   props: {
@@ -152,7 +183,7 @@ export default {
 }
 @font-face {
   font-family: 'dq-fangtang';
-  src: url(../assets/fangtang.ttf) format('truetype')
+  src: url(../assets/xiaowanzi.ttf) format('truetype')
 }
 @font-face {
   font-family: 'dq-guofengran';
@@ -168,7 +199,7 @@ export default {
   // padding: 30px;
   box-sizing: border-box;
   box-shadow: 0px 0px 1px 1px black;
-  line-height: 22px;
+  line-height: 26px;
   font-family: 'dq-guofengran';
   .content {
     height: 100%;
@@ -179,30 +210,51 @@ export default {
     grid-gap: 2%;
     .left-col {
       // background: #5580A0;
+      box-sizing: border-box;
       backdrop-filter: blur(10px);
-      border: 1px rgba(112, 161, 255,1.0) solid;
+      // border: 1px rgba(112, 161, 255,1.0) solid;
       box-shadow: 1px 1px 3px rgb(112, 161, 255);
       background-color: rgba(112, 161, 255, 0.5);
       border-radius: 5px;
+      display: flex;
+      flex-direction: column;
       // color: white;
+      .title {
+        font-size: 16px;
+        text-align: center;
+        margin: 10px auto 5px auto;
+        border-bottom: 1px dashed grey;
+      }
       .name {
-        font-size: 40px;
+        font-size: 44px;
         line-height: 30px;
         font-family: 'dq-fangtang';
         text-align: center;
         vertical-align: middle;
         padding: 16px 8px;
         color: #2f3542;
-        background-color: rgba(255, 165, 2,1.0);
+        background-color: rgba(255, 165, 2, 1.0);
+      }
+      .infos-list {
+        margin: 10px 5px;
+        .base-info {
+          
+        }
       }
       .contact-list {
         margin: 10px 5px;
         font-size: 12px;
+        color: #555;
+
         .contact-item {
           display: flex;
           .logo {
             flex: 0 0 20px;
             margin-right: 6px;
+          }
+          a {
+            text-decoration: none;
+            color: #555;
           }
         }
       }
@@ -213,27 +265,72 @@ export default {
         .photo-content {
           width: 26mm;
           height: 32mm;
-          border: solid 1px grey;
+          border: dashed 1px grey;
           border-radius: 4px;
+          cursor: pointer;
         }
         #upload-input {
           display: none;
         }
       }
 
+      .skills-block {
+        align-self: center;
+        margin-top:24px;
+        width: 240px;
+        .skills {
+          width: 240px;
+          position:relative;
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          justify-items: center;
+
+          .skill {
+            width:85%;
+            height: 24px;
+            border-radius:4px;
+            position:relative;
+            border:#fed330 1px solid;
+            box-shadow: 1px 1px 3px #fed330;
+            margin:4px;
+            float:left;
+            font-weight: 400;
+            .skill-name {
+              text-align:center;
+              position:absolute;
+              top:50%;
+              transform:translateY(-50%);
+              width:100%;
+              font-size: 12px;
+              color: rgba(19, 15, 64,1.0);
+              font-weight: 500;
+            }
+          }
+          .skill::before{
+            content:'';
+            background-color: rgba(156, 136, 255,0.3);
+            clip-path: polygon(0 0,var(--percentage) 0, var(--percentage) 100%,0 100%);
+            display: block;
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
     }
 
     .right-col {
       flex: 1;
       // background-color: #cc8a4d;
       height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       .first-level {
         padding: 10px;
         // border: 1px solid #5698c3;
-        margin-bottom: 10px;
         border-radius: 8px;
-        border:1px solid rgba(130, 88, 159, 0.8);
-        box-shadow: 2px 2px 2px rgb(130, 88, 159);
+        border:1px solid rgba(112, 161, 255, 0.6);
+        box-shadow: 2px 2px 2px rgba(112, 161, 255, 0.5);
 
         .first-title {
           font-family: 'dq-font';
@@ -248,6 +345,7 @@ export default {
           .descs {
             .desc {
               display: flex;
+              white-space: pre-wrap;
               .key-desc {
                 flex: 0 0 70px;
               }
