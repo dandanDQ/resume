@@ -11,7 +11,18 @@
         </div>
         <div class="name" v-if="name">{{name}}</div>
 
+        <div class="infos-list" v-if="infos.length">
+          <div class="title">基本信息</div>
+          <div v-for="(info, idx) in infos" :key="idx" class="base-info">
+            <div v-if="typeof info === 'object'">
+              <div v-for="(val,key) in  info" :key="key">{{key}}: {{val}}</div>
+            </div>
+            <div v-else>{{info}}</div>
+          </div>
+        </div>
+
         <div class="contact-list">
+          <div class="title">联系方式</div>
           <div v-if="contact.wechat" class="contact-item">
             <img src="../assets/wechat.svg" alt="" class="logo"> 
             <div>{{contact.wechat}}</div>
@@ -26,11 +37,12 @@
           </div>
           <div v-if="contact.github" class="contact-item">
             <img src="../assets/github.svg" alt="" class="logo"> 
-            <div>{{contact.github}}</div>
+            <a :href="contact.github" target="_blank">{{contact.github}}</a>
           </div>
         </div>
 
-        <div class="skills-block" v-if="skills.length">              
+        <div class="skills-block" v-if="skills.length">    
+          <div class="title">技能概要</div>          
           <div class="skills">
               <span class="skill" v-for="skill in skills" :key="skill.name" :style="{'--percentage': skill.level+'%'}" >
                   <span class="skill-name">{{skill.name}}</span>
@@ -54,7 +66,12 @@
                 <div v-for="(subdesc, key) in desc" :key="key" class="desc">
                   <div class="key-desc">{{ key }}</div>
                   <div class="sub-desc"> 
-                    {{subdesc}}
+                    <div v-if="typeof subdesc === 'object'">
+                       <div v-for="sub in subdesc" :key="sub">{{sub}}</div>
+                    </div>
+                    <div v-else>
+                      {{subdesc}} 
+                    </div>
                   </div>
                 </div>
               </div>
@@ -101,6 +118,9 @@ export default {
     },
     skills() {
       return this.current?.preview?.skills ?? []
+    },
+    infos() {
+      return this.current?.preview?.infos ?? []
     }
   },
   props: {
@@ -163,7 +183,7 @@ export default {
 }
 @font-face {
   font-family: 'dq-fangtang';
-  src: url(../assets/fangtang.ttf) format('truetype')
+  src: url(../assets/xiaowanzi.ttf) format('truetype')
 }
 @font-face {
   font-family: 'dq-guofengran';
@@ -179,7 +199,7 @@ export default {
   // padding: 30px;
   box-sizing: border-box;
   box-shadow: 0px 0px 1px 1px black;
-  line-height: 22px;
+  line-height: 26px;
   font-family: 'dq-guofengran';
   .content {
     height: 100%;
@@ -199,8 +219,14 @@ export default {
       display: flex;
       flex-direction: column;
       // color: white;
+      .title {
+        font-size: 16px;
+        text-align: center;
+        margin: 10px auto 5px auto;
+        border-bottom: 1px dashed grey;
+      }
       .name {
-        font-size: 40px;
+        font-size: 44px;
         line-height: 30px;
         font-family: 'dq-fangtang';
         text-align: center;
@@ -209,14 +235,26 @@ export default {
         color: #2f3542;
         background-color: rgba(255, 165, 2, 1.0);
       }
+      .infos-list {
+        margin: 10px 5px;
+        .base-info {
+          
+        }
+      }
       .contact-list {
         margin: 10px 5px;
         font-size: 12px;
+        color: #555;
+
         .contact-item {
           display: flex;
           .logo {
             flex: 0 0 20px;
             margin-right: 6px;
+          }
+          a {
+            text-decoration: none;
+            color: #555;
           }
         }
       }
@@ -238,18 +276,18 @@ export default {
 
       .skills-block {
         align-self: center;
-        margin-top:20px;
+        margin-top:24px;
         width: 240px;
         .skills {
           width: 240px;
           position:relative;
           display: grid;
-          grid-template-columns: repeat(1, 1fr);
+          grid-template-columns: repeat(2, 1fr);
           justify-items: center;
 
           .skill {
             width:85%;
-            height: 20px;
+            height: 24px;
             border-radius:4px;
             position:relative;
             border:#fed330 1px solid;
@@ -263,7 +301,7 @@ export default {
               top:50%;
               transform:translateY(-50%);
               width:100%;
-              font-size: 14px;
+              font-size: 12px;
               color: rgba(19, 15, 64,1.0);
               font-weight: 500;
             }
@@ -273,8 +311,8 @@ export default {
             background-color: rgba(156, 136, 255,0.3);
             clip-path: polygon(0 0,var(--percentage) 0, var(--percentage) 100%,0 100%);
             display: block;
-            width: 80px;
-            height: 20px;
+            width: 100%;
+            height: 100%;
           }
         }
       }
@@ -307,6 +345,7 @@ export default {
           .descs {
             .desc {
               display: flex;
+              white-space: pre-wrap;
               .key-desc {
                 flex: 0 0 70px;
               }
