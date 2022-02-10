@@ -21,7 +21,7 @@
           </div>
         </div>
 
-        <div class="contact-list">
+        <div class="contact-list" v-if="contact">
           <div class="title">联系方式</div>
           <div v-if="contact.wechat" class="contact-item">
             <img src="../assets/wechat.svg" alt="" class="logo"> 
@@ -44,7 +44,8 @@
         <div class="skills-block" v-if="skills.length">    
           <div class="title">技能概要</div>          
           <div class="skills">
-              <span class="skill" v-for="skill in skills" :key="skill.name" :style="{'--percentage': skill.level+'%'}" >
+              <span class="skill" v-for="skill in skills" :key="skill.name">
+                  <div class="level" :style="{ 'width': skill.level+'%'}"></div>
                   <span class="skill-name">{{skill.name}}</span>
               </span>
           </div>
@@ -114,7 +115,7 @@ export default {
       return this.current?.preview?.name ?? ''
     },
     contact() {
-      return this.current?.preview?.contact ?? []
+      return this.current?.preview?.contact ?? null
     },
     skills() {
       return this.current?.preview?.skills ?? []
@@ -305,15 +306,17 @@ export default {
               color: rgba(19, 15, 64,1.0);
               font-weight: 500;
             }
+            .level {
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              height: 100%;
+              background-color: rgba(156, 136, 255,0.3);
+            }
           }
-          .skill::before{
-            content:'';
-            background-color: rgba(156, 136, 255,0.3);
-            clip-path: polygon(0 0,var(--percentage) 0, var(--percentage) 100%,0 100%);
-            display: block;
-            width: 100%;
-            height: 100%;
-          }
+          
         }
       }
     }
