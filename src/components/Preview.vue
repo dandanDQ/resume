@@ -21,7 +21,7 @@
           </div>
         </div>
 
-        <div class="contact-list">
+        <div class="contact-list" v-if="contact">
           <div class="title">联系方式</div>
           <div v-if="contact.wechat" class="contact-item">
             <img src="../assets/wechat.svg" alt="" class="logo"> 
@@ -115,7 +115,7 @@ export default {
       return this.current?.preview?.name ?? ''
     },
     contact() {
-      return this.current?.preview?.contact ?? []
+      return this.current?.preview?.contact ?? null
     },
     skills() {
       return this.current?.preview?.skills ?? []
