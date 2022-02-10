@@ -61,7 +61,7 @@
   - time：表示时间，将出现在 name 的右侧
   - desc：相关的详细描述，支持文本和文本数组形式
 
-```json
+```yaml
 name: 填名字
 
 infos: 
