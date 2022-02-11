@@ -1,7 +1,7 @@
 <h1 align="center">
 <img rel="icon" src="./docs/icon.png" width="160"/>
   <br>
-  <a href="https://dandandq.github.io/resume/">Resume</a>
+  <a href="https://dandandq.github.io/resume/" target="_blank">Resume</a>
   </br>
 </h1>
 
@@ -18,9 +18,8 @@
 ## 2 使用文档
 
 
-访问链接：[Resume](https://dandandq.github.io/resume/)
 ### 使用示例
-访问 https://dandandq.github.io/resume/， 点击 「+」按钮，新建一页简历，填写 yaml 格式的简历配置项，点击「保存」按钮，在页面右侧生成简历，点击「导出」按钮，将简历导出为pdf。
+访问 <a href="https://dandandq.github.io/resume/" target="_blank">Resume</a>， 点击 「+」按钮，新建一页简历，填写 yaml 格式的简历配置项，点击「保存」按钮，在页面右侧生成简历，点击「导出」按钮，将简历导出为pdf。
 
 动图演示内容：
 - 新建一页简历配置页
