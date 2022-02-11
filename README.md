@@ -6,7 +6,7 @@
 </h1>
 
 ## 1 项目简介
----
+
 
 一个使用 yaml 配置生成简历的项目。其功能点主要包括：
 - 使用 yaml 文件配置简历内容
@@ -16,7 +16,7 @@
 - 支持导出为 pdf
 
 ## 2 使用文档
----
+
 
 访问链接：[Resume](https://dandandq.github.io/resume/)
 ### 使用示例
@@ -137,7 +137,7 @@ FL-xx经历（识别开头是FL-的）:
 
 
 ## 3 开发文档
----
+
 
 ```shell
 yarn install
@@ -187,7 +187,7 @@ window.addEventListener('resize', () => {
 
 
 ## 4 功能 List
----
+
 - [x] 编辑器界面
 - [x] 简历信息模块：姓名，基本信息，联系方式，技能列表
 - [x] 简历项目模块
@@ -201,5 +201,5 @@ window.addEventListener('resize', () => {
 - [ ] 各个模块支持拖拽调整等？
 
 ## 5 License
----
+
 [MIT](https://opensource.org/licenses/MIT)
