@@ -6,6 +6,7 @@
 </h1>
 
 ## 1 项目简介
+---
 
 一个使用 yaml 配置生成简历的项目。其功能点主要包括：
 - 使用 yaml 文件配置简历内容
@@ -15,6 +16,7 @@
 - 支持导出为 pdf
 
 ## 2 使用文档
+---
 
 访问链接：[Resume](https://dandandq.github.io/resume/)
 ### 使用示例
@@ -89,7 +91,7 @@ FL-xx经历（识别开头是FL-的）:
 ```
 
 简单说明一下 yaml 格式的文件。'- ' 开头表示数组的某一项， 而 'xx: xxx' 则是典型的 key: value 组合。上述配置将转化为以下 json 文件：
-```
+```json
 {
     "name": "填名字",
     "infos": [
@@ -135,6 +137,7 @@ FL-xx经历（识别开头是FL-的）:
 
 
 ## 3 开发文档
+---
 
 ```shell
 yarn install
@@ -144,7 +147,7 @@ yarn dev
 部署到github pages：
 修改 deploy.sh 文件里部署的仓库地址和分支
 然后执行
-```
+```shell
 yarn deploy
 ```
 
@@ -184,6 +187,7 @@ window.addEventListener('resize', () => {
 
 
 ## 4 功能 List
+---
 - [x] 编辑器界面
 - [x] 简历信息模块：姓名，基本信息，联系方式，技能列表
 - [x] 简历项目模块
@@ -195,3 +199,7 @@ window.addEventListener('resize', () => {
 - [ ] 简历各个模块支持切换样式，比如skills模块，项目详情模块，各种小logo支持切换
 - [ ] 移动端导出功能
 - [ ] 各个模块支持拖拽调整等？
+
+## 5 License
+---
+[MIT](https://opensource.org/licenses/MIT)
