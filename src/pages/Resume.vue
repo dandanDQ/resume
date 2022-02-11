@@ -130,6 +130,7 @@ export default {
           if(this.editorList.length >= this.capacity) break;
           this.editorList.push({ yaml: defaulVal, preview: {}})
           this.current = this.editorList[this.editorList.length - 1]
+          this.saveFlag = !this.saveFlag // 触发生成预览
           break;
         }
         case 'delete' : {
