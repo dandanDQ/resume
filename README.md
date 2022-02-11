@@ -148,4 +148,50 @@ yarn dev
 yarn deploy
 ```
 
-todo
+### 技术要点
+
+##### yaml 转 json
+yaml 主要用过换行和缩进来区分不同类型的数据
+使用 js-yaml 库进行数据转换
+
+```js
+import yaml from 'js-yaml';
+const jsonFormat = yaml.load(yamlFormat)
+```
+
+##### monaco编辑器使用
+
+调用 api，传入配置生成编辑器界面。
+```js
+import * as monaco from 'monaco-editor'
+this.editor = monaco.editor.create(document.getElementById('container'), {
+      value: '', // yaml 文本的值
+      language: 'yaml', // 这里选定语言为 yaml
+      lineNumbers: 'on',
+      roundedSelection: false,
+      scrollBeyondLastLine: false,
+      readOnly: false,
+      theme: 'vs-dark',
+      formatOnPaste: true,
+      automaticLayout: true,
+      wordWrap: 'on',
+    });
+// 窗口缩放时编辑器也能自适应大小
+window.addEventListener('resize', () => {
+  toRaw(this.editor).layout() // toRaw 是因为 vue3 将 data 都转为响应式了，需要恢复为非响应式
+})
+```
+
+
+## 4 功能 List
+- [x] 编辑器界面
+- [x] 简历信息模块：姓名，基本信息，联系方式，技能列表
+- [x] 简历项目模块
+- [x] 简历头像上传
+- [x] 工具栏：增加，下一个，删除，
+- [x] 根据 yaml 文件生成简历配置 json
+- [x] 简历导出功能
+- [ ] 更多简历排版方式
+- [ ] 简历各个模块支持切换样式，比如skills模块，项目详情模块，各种小logo支持切换
+- [ ] 移动端导出功能
+- [ ] 各个模块支持拖拽调整等？
