@@ -105,6 +105,7 @@ export default {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  font-weight: 400;
   .top-col {
     // background: #5580A0;
     box-sizing: border-box;
@@ -129,7 +130,7 @@ export default {
         font-size: 44px;
         line-height: 30px;
         font-family: 'dq-fangtang';
-        text-align: center;
+        // text-align: center;
         vertical-align: middle;
         padding: 16px 8px;
         color: #2f3542;
@@ -183,7 +184,7 @@ export default {
           display: flex;
           justify-content: space-between;
           font-size: 14px;
-          font-weight: bold;
+          font-weight: 600;
 
           .time {
             color: #868686;
