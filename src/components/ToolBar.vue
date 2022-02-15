@@ -24,6 +24,9 @@
     <div class="ui-button" @click="exportPreview">
       <img src="../assets/pdf_export.svg" />
     </div>
+    <div class="ui-button" @click="changePreview">
+      <img src="../assets/页面样式.svg" />
+    </div>
   </div>
 </template>
 <script>
@@ -43,7 +46,12 @@ export default {
       },
     },
   },
-  emits: ['change-editor-list', 'get-editor-value', 'export-preview'],
+  emits: [
+    'change-editor-list',
+    'get-editor-value',
+    'export-preview',
+    'change-preview',
+  ],
   mounted() {
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
@@ -60,6 +68,9 @@ export default {
     },
     exportPreview() {
       this.$emit('export-preview');
+    },
+    changePreview() {
+      this.$emit('change-preview');
     },
   },
 };

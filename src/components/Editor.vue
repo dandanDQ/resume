@@ -55,7 +55,7 @@ export default {
       language: 'yaml',
       lineNumbers: 'on',
       roundedSelection: false,
-      scrollBeyondLastLine: false,
+      scrollBeyondLastLine: true,
       readOnly: false,
       theme: 'vs-dark',
       formatOnPaste: true,

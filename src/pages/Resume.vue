@@ -6,21 +6,21 @@
         @change-editor-list="changeEditorList"
         @get-editor-value="saveFlag = !saveFlag"
         @export-preview="exportFlag = !exportFlag"
+        @change-preview="previewFlag = !previewFlag"
         :editorList="editorList"
         :current="current"/>
       <editor :current="current" :saveFlag="saveFlag"/>
     </section>
     <section>
-      <preview :current="current" :exportFlag="exportFlag"/>
+      <preview :current="current" :exportFlag="exportFlag" :previewFlag="previewFlag"/>
     </section>
   </article>
 </template>
 <script>
-import Editor from '../components/Editor.vue'
-import Preview from '../components/Preview.vue'
-import Title from '../components/Title.vue'
-import ToolBar from '../components/ToolBar.vue'
-
+import Editor from '@/components/Editor.vue'
+import Preview from '@/components/Preview.vue'
+import Title from '@/components/Title.vue'
+import ToolBar from '@/components/ToolBar.vue'
 
 const defaulVal = `name: 填名字
 
@@ -101,7 +101,8 @@ export default {
       current: null,
       capacity: 6,
       saveFlag: true,
-      exportFlag: true
+      exportFlag: true,
+      previewFlag: true
     }
   },
   created() { 
@@ -113,9 +114,6 @@ export default {
     })
 
     this.current = this.editorList[0]
-  },
-  mounted() {
-  
   },
   methods: {
     changeEditorList(editor) {

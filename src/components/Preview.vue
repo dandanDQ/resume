@@ -1,99 +1,24 @@
 <template>
   <div class="preview" id="resume-preview">
-    <!-- <div class="test" style="color: red">{{ preview }}</div> -->
-    <div class="content">
-      <article class="left-col">
-        <div class="photo">
-          <div @click="uploadPhoto" class="photo-content">
-            <img src="" alt="" id="upload-img">
-          </div>
-          <input type="file" id="upload-input" accept="image/*" @change="loadImg">
-        </div>
-        <div class="name" v-if="name">{{name}}</div>
-
-        <div class="infos-list" v-if="infos.length">
-          <div class="title">基本信息</div>
-          <div v-for="(info, idx) in infos" :key="idx" class="base-info">
-            <div v-if="typeof info === 'object'">
-              <div v-for="(val,key) in  info" :key="key">{{key}}: {{val}}</div>
-            </div>
-            <div v-else>{{info}}</div>
-          </div>
-        </div>
-
-        <div class="contact-list" v-if="contact">
-          <div class="title">联系方式</div>
-          <div v-if="contact.wechat" class="contact-item">
-            <img src="../assets/wechat.svg" alt="" class="logo"> 
-            <div>{{contact.wechat}}</div>
-          </div>
-          <div v-if="contact.phone" class="contact-item">
-            <img src="../assets/phone.svg" alt="" class="logo"> 
-            <div>{{contact.phone}}</div>
-          </div>
-          <div v-if="contact.email" class="contact-item">
-            <img src="../assets/email.svg" alt="" class="logo"> 
-            <div>{{contact.email}}</div>
-          </div>
-          <div v-if="contact.github" class="contact-item">
-            <img src="../assets/github.svg" alt="" class="logo"> 
-            <a :href="contact.github" target="_blank">{{contact.github}}</a>
-          </div>
-        </div>
-
-        <div class="skills-block" v-if="skills.length">    
-          <div class="title">技能概要</div>          
-          <div class="skills">
-              <span class="skill" v-for="skill in skills" :key="skill.name">
-                  <div class="level" :style="{ 'width': skill.level+'%'}"></div>
-                  <span class="skill-name">{{skill.name}}</span>
-              </span>
-          </div>
-        </div>
-      </article>
-      <!-- cards of first level. -->
-      <article class="right-col">
-        <section class="first-level" v-for="(firstLevel, firstTitle) in firstLevels" :key="firstTitle">
-          <div class="first-title">
-            <div>{{firstTitle}}</div>
-          </div>
-          <div v-for="item in firstLevel" :key="item?.['名称']" class="second-level">
-            <div class="second-title">
-              <div class="name">{{ item?.['name'] }}</div>
-              <div class="time">{{ item?.['time'] }}</div>
-            </div>
-            <div v-if="item?.['desc']">
-              <div v-for="(desc, idx) in item?.['desc']" :key="idx" class="descs">
-                <div v-for="(subdesc, key) in desc" :key="key" class="desc">
-                  <div class="key-desc">{{ key }}</div>
-                  <div class="sub-desc"> 
-                    <div v-if="typeof subdesc === 'object'">
-                       <div v-for="sub in subdesc" :key="sub">{{sub}}</div>
-                    </div>
-                    <div v-else>
-                      {{subdesc}} 
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </article>
-    </div>
+    <component :is="comName" :preview="current.preview" :firstLevels="firstLevels"></component>
   </div>
 </template> 
 <script>
 import { jsPDF } from "jspdf";
-import html2canvas from "html2canvas";  
+import html2canvas from "html2canvas"; 
+import { comList, components}  from '@/components/utils.js'
 
 export default {
   name: 'Preview',
   data() {
     return {
-      firstLevels: []
+      firstLevels: {},
+      comList: comList,
+      comIdx: 0,
+      comName: 'PreviewTemplate01'
     }
   },
+  components,
   watch: {
     'current.preview': {
       immediate: true,
@@ -105,24 +30,17 @@ export default {
       handler() {
         this.onExport()
       }
-    }
+    },
+    previewFlag: {
+      handler() {
+        this.onChangePreview()
+      }
+    },
   },
   computed: {
     preview() {
       return this.current.preview ?? {}
     },
-    name() {
-      return this.current?.preview?.name ?? ''
-    },
-    contact() {
-      return this.current?.preview?.contact ?? null
-    },
-    skills() {
-      return this.current?.preview?.skills ?? []
-    },
-    infos() {
-      return this.current?.preview?.infos ?? []
-    }
   },
   props: {
     current: {
@@ -134,7 +52,11 @@ export default {
     exportFlag: {
       type: Boolean,
       default: true
-    }
+    },
+    previewFlag: {
+      type: Boolean,
+      default: true
+    },
   },
   methods: {
     loadData(preview) {
@@ -154,21 +76,9 @@ export default {
         pdf.save("a4.pdf");
       })
     },
-    uploadPhoto() {
-      const upload = document.querySelector('#upload-input')
-      upload.click()
-    },
-    loadImg() {
-      const imgFile = document.querySelector('#upload-input')?.files[0]
-      const reader = new FileReader()
-      reader.readAsDataURL(imgFile)
-      reader.onload = function() {
-        const img = document.querySelector('#upload-img')
-        img.setAttribute("src", reader.result)
-        img.style.width = '26mm'
-        img.style.height = '32mm'
-        img.style['object-fit'] = 'cover'
-      }
+    onChangePreview() {
+      this.comIdx = (this.comIdx + 1) % this.comList.length
+      this.comName = this.comList[this.comIdx]
     }
   }
 }
