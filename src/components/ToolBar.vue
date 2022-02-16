@@ -27,6 +27,11 @@
     <div class="ui-button change-preview" @click="changePreview">
       <img src="../assets/页面样式.svg" />
     </div>
+
+    <div class="ui-button change-color" @click="changeColor">
+      <img src="../assets/调色2.svg" />
+      <input id="change-color" type="color" style="display: none" />
+    </div>
   </div>
 </template>
 <script>
@@ -58,6 +63,9 @@ export default {
         this.getEditorValue();
       }
     });
+    document.querySelector('#change-color').addEventListener('change', (e) => {
+      console.log(e?.target?.value, '新的颜色值');
+    });
   },
   methods: {
     changeEditorList(editor) {
@@ -71,6 +79,9 @@ export default {
     },
     changePreview() {
       this.$emit('change-preview');
+    },
+    changeColor() {
+      document.querySelector('#change-color').click();
     },
   },
 };
@@ -87,6 +98,20 @@ export default {
     position: relative;
     &::before {
       content: '切换简历样式';
+      position: absolute;
+      top: -30px;
+      display: none;
+      font-size: 14px;
+      color: rgb(202, 202, 202);
+    }
+    &:hover::before {
+      display: block;
+    }
+  }
+  .change-color {
+    position: relative;
+    &::before {
+      content: '切换简历颜色【开发中】';
       position: absolute;
       top: -30px;
       display: none;
