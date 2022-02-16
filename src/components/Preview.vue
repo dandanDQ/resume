@@ -62,8 +62,8 @@ export default {
     loadData(preview) {
       this.firstLevels = {}
       for(const key in preview) {
-        if(key.indexOf('FL-') > -1) {
-          this.firstLevels[key.slice(3)] = preview[key]
+        if(key.indexOf('CARD-') > -1) {
+          this.firstLevels[key.slice(5)] = preview[key]
         }
       }
     },

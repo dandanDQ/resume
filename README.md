@@ -58,7 +58,7 @@
   - email 邮箱
   - github github链接，这里是可点击访问的
 - skills：个人技能，是个数组。数组每一项是个对象，包含 name 和 level，表示技能名称和掌握程度。
-- FL-开头的：识别为右侧的一个卡片，是一个数组，每一项包括 name，time，decs 三个 key。
+- CARD-开头的：识别为右侧的一个卡片，是一个数组，每一项包括 name，time，decs 三个 key。
   - name：表示对应的名称
   - time：表示时间，将出现在 name 的右侧
   - desc：相关的详细描述，支持文本和文本数组形式
@@ -82,7 +82,7 @@ skills:
 - name: HTML5
   level: 75
 
-FL-xx经历（识别开头是FL-的）:
+CARD-xx经历（识别开头是CARD-的）:
 - name: 大标题
   time: 时间时间时间
   desc:
@@ -118,7 +118,7 @@ FL-xx经历（识别开头是FL-的）:
             "level": 75
         },
     ],
-    "FL-xx经历（识别开头是FL-的）": [
+    "CARD-xx经历（识别开头是CARD-的）": [
         {
             "name": "大标题",
             "time": "时间时间时间",
