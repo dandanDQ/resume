@@ -99,7 +99,7 @@ export default {
     &::before {
       content: '切换简历样式';
       position: absolute;
-      top: -30px;
+      top: -20px;
       display: none;
       font-size: 14px;
       color: rgb(202, 202, 202);
@@ -113,7 +113,7 @@ export default {
     &::before {
       content: '切换简历颜色【开发中】';
       position: absolute;
-      top: -30px;
+      top: -20px;
       display: none;
       font-size: 14px;
       color: rgb(202, 202, 202);
@@ -125,9 +125,9 @@ export default {
   .save {
     position: relative;
     &::before {
-      content: '生成简历预览';
+      content: '生成简历预览，快捷键enter';
       position: absolute;
-      top: -30px;
+      top: -20px;
       display: none;
       font-size: 14px;
       color: rgb(202, 202, 202);
@@ -141,7 +141,7 @@ export default {
     &::before {
       content: '导出pdf';
       position: absolute;
-      top: -30px;
+      top: -20px;
       display: none;
       font-size: 14px;
       color: rgb(202, 202, 202);

@@ -19,28 +19,49 @@
 
 
 ### 使用示例
-访问 <a href="https://dandandq.github.io/resume/" target="_blank">Resume</a>， 点击 「+」按钮，新建一页简历，填写 yaml 格式的简历配置项，点击「保存」按钮，在页面右侧生成简历，点击「导出」按钮，将简历导出为pdf。
+访问 <a href="https://dandandq.github.io/resume/" target="_blank">Resume</a>
 
-动图演示内容：
-- 新建一页简历配置页
-- 使用默认配置项生成简历
-- 清空已填写配置，逐项填写简历配置项，并生成对应简历
-- 将简历导出为pdf
 
-![](./docs/demovideo.gif)
+![](./docs/demo-video.gif)
 
 ### 操作按键和快捷键介绍
 
 <img src="./docs/demo-btn.png" width="400px">
 
+
+
 页面左侧上方为操作按钮区域。
-- 1：不同的简历配置页，点击即在左侧编辑区加载对应的 yaml 配置
-- 2：新建简历配置页
-- 3：切换到下一个简历配置页（这个好像没啥用）
-- 4：删除当前简历配置页（当只有一项时不允许删除）
-- 5：根据左侧内容，生成右侧简历预览
-- 6：将右侧预览区导出为 pdf
-- 7：切换右侧简历样式
+
+<img src="./docs/paper.svg">
+
+- 不同的简历配置页，点击即在左侧编辑区加载对应的 yaml 配置
+  
+<img src="./docs/add.svg">
+
+- 新建简历配置页
+
+
+<img src="./docs/delete.svg">
+
+- 删除当前简历配置页（当只有一项时不允许删除）
+
+<img src="./docs/生成.svg">
+
+- 根据左侧内容，生成右侧简历预览
+
+
+<img src="./docs/pdf_export.svg">
+
+- 将右侧预览区导出为 pdf
+
+<img src="./docs/页面样式.svg">
+
+- 切换右侧简历样式
+
+
+
+
+
 
 注意事项：
 - 每次刷新页面前，都会保存当前所有的简历配置页，下次刷新还是一样的内容！
