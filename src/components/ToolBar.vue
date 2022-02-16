@@ -12,19 +12,19 @@
     <div class="ui-button" @click="changeEditorList('add')">
       <img src="../assets/add.svg" />
     </div>
-    <div class="ui-button" @click="changeEditorList('next')">
+    <!-- <div class="ui-button" @click="changeEditorList('next')">
       <img src="../assets/icon_next.svg" />
-    </div>
+    </div> -->
     <div class="ui-button" @click="changeEditorList('delete')">
       <img src="../assets/delete.svg" />
     </div>
-    <div class="ui-button" @click="getEditorValue">
-      <img src="../assets/save.svg" />
+    <div class="ui-button save" @click="getEditorValue">
+      <img src="../assets/生成.svg" />
     </div>
-    <div class="ui-button" @click="exportPreview">
+    <div class="ui-button export" @click="exportPreview">
       <img src="../assets/pdf_export.svg" />
     </div>
-    <div class="ui-button" @click="changePreview">
+    <div class="ui-button change-preview" @click="changePreview">
       <img src="../assets/页面样式.svg" />
     </div>
   </div>
@@ -82,6 +82,48 @@ export default {
   }
   div {
     margin-bottom: 10px;
+  }
+  .change-preview {
+    position: relative;
+    &::before {
+      content: '切换简历样式';
+      position: absolute;
+      top: -30px;
+      display: none;
+      font-size: 14px;
+      color: rgb(202, 202, 202);
+    }
+    &:hover::before {
+      display: block;
+    }
+  }
+  .save {
+    position: relative;
+    &::before {
+      content: '生成简历预览';
+      position: absolute;
+      top: -30px;
+      display: none;
+      font-size: 14px;
+      color: rgb(202, 202, 202);
+    }
+    &:hover::before {
+      display: block;
+    }
+  }
+  .export {
+    position: relative;
+    &::before {
+      content: '导出pdf';
+      position: absolute;
+      top: -30px;
+      display: none;
+      font-size: 14px;
+      color: rgb(202, 202, 202);
+    }
+    &:hover::before {
+      display: block;
+    }
   }
 }
 </style>

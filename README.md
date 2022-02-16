@@ -40,12 +40,13 @@
 - 4：删除当前简历配置页（当只有一项时不允许删除）
 - 5：根据左侧内容，生成右侧简历预览
 - 6：将右侧预览区导出为 pdf
+- 7：切换右侧简历样式
 
 注意事项：
 - 每次刷新页面前，都会保存当前所有的简历配置页，下次刷新还是一样的内容！
 - 按钮5的等效快捷键为 enter，一般鼠标焦点需要不在编辑器内才能生效
 - 每次新建简历配置页，都会有默认的配置项，按一下保存按钮就能在右侧生成内容较为饱满的简历了
-
+- 由于 html2canvas 导出图片时，存在 css 属性不支持、字体模糊的问题，可以直接在网页上右键选择打印，在打印页面的「更多设置」中，将缩放调至150，打印即可。（以chrome为例，缩放比例自行调整）
 ### yaml 配置文件格式说明
 
 在简历配置页的初始值上删改，就可以快速生成简历啦，其中有用的key，都是英文的，需要的配置项就保留，不需要的直接删除。已有的 key 列举如下:
@@ -150,6 +151,7 @@ yarn dev
 yarn deploy
 ```
 
+
 ### 技术要点
 
 ##### yaml 转 json
@@ -184,7 +186,52 @@ window.addEventListener('resize', () => {
 })
 ```
 
+### 支持多样式快速开发
+/src/components/templates 文件夹存放简历样式模板，通过脚本扫描该文件夹，并作为异步组件挂载。
 
+```js
+// 扫描文件夹
+import { defineAsyncComponent } from 'vue'
+
+// 导出组件列表，并注册异步组件
+const files = import.meta.glob("/src/components/templates/*.vue")
+const comList = []
+const components = {}
+
+Object.keys(files).map((file) => {
+  const comName = file.slice(26, -4)
+  comList.push(comName)
+  components[comName] = defineAsyncComponent({
+    loader: files[file]
+  })
+})
+
+export { comList, components } 
+```
+
+```html
+// 挂载组件，并实现异步、动态加载组件
+<component :is="comName"></component>
+```
+```js
+export dafault {
+  components,
+  data() {
+    return {
+      comList: comList,
+      comIdx: 0,
+      comName: 'PreviewTemplate01'
+    }
+  },
+  methods: {
+    onChangePreview() {
+      this.comIdx = (this.comIdx + 1) % this.comList.length
+      this.comName = this.comList[this.comIdx]
+    }
+  }
+}
+
+```
 ## 4 功能 List
 
 - [x] 编辑器界面

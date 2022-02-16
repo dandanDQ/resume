@@ -37,7 +37,7 @@ export default {
   .photo-content {
     width: 26mm;
     height: 32mm;
-    border: dashed 1px grey;
+    border: dashed 1px rgb(255, 255, 255);
     border-radius: 4px;
     cursor: pointer;
   }

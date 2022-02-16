@@ -1,6 +1,6 @@
 <template>
   <article class="resume">
-    <section>
+    <section class="tool-section">
       <title />
       <tool-bar 
         @change-editor-list="changeEditorList"
@@ -11,7 +11,7 @@
         :current="current"/>
       <editor :current="current" :saveFlag="saveFlag"/>
     </section>
-    <section>
+    <section class="preview-section">
       <preview :current="current" :exportFlag="exportFlag" :previewFlag="previewFlag"/>
     </section>
   </article>
@@ -147,7 +147,7 @@ export default {
   }
 }
 </script>
-<style scoped lang="scss">
+<style lang="scss">
 article.resume {
   border: 1px solid grey;
   border-radius: 4px;
@@ -159,5 +159,37 @@ article.resume {
   grid-gap: 10px;
   width: 95vw;
   min-width: calc(300px + 220mm);
+}
+@media print {
+  body {
+    width: 210mm;
+    min-width: 210mm;
+    height: 297mm;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: white;
+    -webkit-print-color-adjust:exact;
+    -webkit-filter: opacity(1);
+  }
+  article.resume {
+    background-color: white;
+    width: 210mm;
+    min-width: 210mm;
+    height: 297mm;
+    border: none;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  .tool-section {
+    display: none;
+  }
+  .preview-section {
+    width: 210mm;
+    min-width: 210mm;
+    height: 297mm;
+    box-shadow: none;
+  }
 }
 </style>
