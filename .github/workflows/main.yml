@@ -41,10 +41,10 @@ jobs:
       - run: yarn build
       - run: cd ./dist
       - run: git init
-      - run: git add -A
-      - run: "git commit -m 'feat: deploy'"
       - run: 'git config --global user.email "shendanqiong@qq.com"'
       - run: 'git config --global user.name "dandanDQ"'
+      - run: git add -A
+      - run: "git commit -m 'feat: deploy'"
       - run: "git push -f git@github.com:dandanDQ/resume.git master:deploy"
 
 
