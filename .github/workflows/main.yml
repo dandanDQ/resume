@@ -41,17 +41,18 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
 
-      - run: set -e
-      - run: rm -rf dist
-      - run: yarn install
+      - name: yarn install
+        run: yarn install
       - run: yarn build
-      - run: cd ./dist
-      - run: git init
-      - run: 'git config --global user.email "shendanqiong@qq.com"'
-      - run: 'git config --global user.name "dandanDQ"'
-      - run: git add -A
-      - run: "git commit -m 'feat: deploy'"
-      - run: "git push -f git@github.com:dandanDQ/resume.git master:deploy"
+      - run: cd $PUBLISH_DIR
+             git init
+             'git config --local user.email $USER_NAME
+             'git config --local user.name $USER_EMAIL
+             git remote add origin https://$MY_SECRET@github.com/$GITHUB_REPOSITORY.git
+             git checkout -b deploy
+             git add --all
+             "git commit -m 'feat: deploy'"
+             "git push origin deploy -f"
 
 
 
