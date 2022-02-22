@@ -37,6 +37,7 @@ jobs:
 
       - run: set -e
       - run: rm -rf dist
+      - run: yarn install
       - run: yarn build
       - run: cd ./dist
       - run: git init
