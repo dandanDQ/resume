@@ -46,13 +46,13 @@ jobs:
       - run: yarn build
       - run: cd $PUBLISH_DIR
              git init
-             'git config --local user.email $USER_NAME
-             'git config --local user.name $USER_EMAIL
+             git config --local user.email $USER_NAME
+             git config --local user.name $USER_EMAIL
              git remote add origin https://$MY_SECRET@github.com/$GITHUB_REPOSITORY.git
              git checkout -b deploy
              git add --all
-             "git commit -m 'feat: deploy'"
-             "git push origin deploy -f"
+             git commit -m "deploy to Github pages"
+             git push origin deploy -f
 
 
 
