@@ -26,7 +26,6 @@ const defaulVal = `name: 填名字
 
 infos: 
   - xxx: xxx
-  - xxx: xxx
 
 contact:
   phone: 填电话
