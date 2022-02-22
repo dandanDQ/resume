@@ -44,7 +44,8 @@ jobs:
       - name: yarn install
         run: yarn install
       - run: yarn build
-      - run: cd $PUBLISH_DIR
+      - run: |
+             cd $PUBLISH_DIR
              git init
              git config --local user.email $USER_NAME
              git config --local user.name $USER_EMAIL
