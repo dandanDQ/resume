@@ -32,6 +32,11 @@
       <img src="../assets/调色2.svg" />
       <input id="change-color" type="color" style="display: none" />
     </div>
+    <div class="ui-button" ><a href="https://github.com/dandanDQ/resume" target="_blank" style="line-height: 10px">
+      <img src="../assets/github2.svg" />
+    </a></div>
+    
+    
   </div>
 </template>
 <script>
