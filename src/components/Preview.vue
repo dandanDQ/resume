@@ -80,7 +80,13 @@ export default {
       this.comIdx = (this.comIdx + 1) % this.comList.length
       this.comName = this.comList[this.comIdx]
     }
-  }
+  },
+  created() { 
+    this.comName = window.localStorage.getItem('comName') ?? 'PreviewTemplate01'
+    window.addEventListener('beforeunload', (e) => {
+      window.localStorage.setItem('comName', this.comName)
+    })
+  },
 }
 </script>
 <style lang="scss" scoped>
