@@ -24,7 +24,7 @@
         <div class="box">
           <div class="remove" @click="removeItem(item.i)"></div>
           <div class="text">
-            <TextEditor :list="item.list"/>
+            <TextEditor :list="item.list" :editMode="editMode"/>
           </div>
         </div>
       </grid-item>
@@ -53,6 +53,10 @@ export default {
       default() {
         return {};
       },
+    },
+    editMode: {
+      type: Boolean,
+      default: true,
     },
   },
   data() {

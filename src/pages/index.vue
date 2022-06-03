@@ -2,14 +2,49 @@
   <article class="resume">
     <section class="tool-section">
       <title />
-      <tool-bar 
-        @change-editor-list="changeEditorList"
-        @get-editor-value="loadData"
-        @export-preview="onExport"
-        @change-preview="onChangePreview"
-        @save-html="saveHtml"
-        :editorList="editorList"
-        :current="current"/>
+        <div class="tool-bar">
+          <div
+            v-for="editor in editorList"
+            :key="editor"
+            class="ui-button"
+            :class="{ highlight: current === editor }"
+            @click="changeEditorList(editor)"
+          >
+            <img src="../assets/paper.svg" />
+          </div>
+          <div class="ui-button" @click="changeEditorList('add')">
+            <img src="../assets/add.svg" />
+          </div>
+
+          <div class="ui-button" @click="saveHtml">
+            saveHtml
+          </div>
+          <!-- <div class="ui-button" @click="changeEditorList('next')">
+            <img src="../assets/icon_next.svg" />
+          </div> -->
+          <div class="ui-button" @click="changeEditorList('delete')">
+            <img src="../assets/delete.svg" />
+          </div>
+          <div class="ui-button save" @click="loadData">
+            <img src="../assets/生成.svg" />
+          </div>
+          <div class="ui-button export" @click="onExport">
+            <img src="../assets/pdf_export.svg" />
+          </div>
+          <div class="ui-button change-preview" @click="onChangePreview">
+            <img src="../assets/页面样式.svg" />
+          </div>
+
+          <div class="ui-button change-color" @click="changeColor">
+            <img src="../assets/调色2.svg" />
+            <input id="change-color" type="color" style="display: none" />
+          </div>
+          <div class="ui-button" ><a href="https://github.com/dandanDQ/resume" target="_blank" style="line-height: 10px">
+            <img src="../assets/github2.svg" />
+          </a></div>
+          
+          
+        </div>
       <editor :current="current" :saveFlag="saveFlag"/>
     </section>
     <section class="preview-section" id="resume-preview">
@@ -20,7 +55,6 @@
 <script>
 import Editor from '@/components/Editor.vue'
 import Title from '@/components/Title.vue'
-import ToolBar from '@/components/ToolBar.vue'
 
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas"; 
@@ -100,7 +134,6 @@ export default {
   components: {
     Editor,
     Title,
-    ToolBar,
     ...components,
   },
   data() {
@@ -237,6 +270,71 @@ article.resume {
     font-family: 'dq-guofengran';
     font-weight: 400;
   }
+
+  .tool-bar {
+  .highlight {
+    border: #ffdd40 1px solid;
+  }
+  div {
+    margin-bottom: 10px;
+  }
+  .change-preview {
+    position: relative;
+    &::before {
+      content: '切换简历样式';
+      position: absolute;
+      top: -20px;
+      display: none;
+      font-size: 14px;
+      color: rgb(202, 202, 202);
+    }
+    &:hover::before {
+      display: block;
+    }
+  }
+  .change-color {
+    position: relative;
+    &::before {
+      content: '切换简历颜色【开发中】';
+      position: absolute;
+      top: -20px;
+      display: none;
+      font-size: 14px;
+      color: rgb(202, 202, 202);
+    }
+    &:hover::before {
+      display: block;
+    }
+  }
+  .save {
+    position: relative;
+    &::before {
+      content: '生成简历预览，快捷键enter';
+      position: absolute;
+      top: -20px;
+      display: none;
+      font-size: 14px;
+      color: rgb(202, 202, 202);
+    }
+    &:hover::before {
+      display: block;
+    }
+  }
+  .export {
+    position: relative;
+    &::before {
+      content: '导出pdf';
+      position: absolute;
+      top: -20px;
+      display: none;
+      font-size: 14px;
+      color: rgb(202, 202, 202);
+    }
+    &:hover::before {
+      display: block;
+    }
+  }
+}
 }
 @media print {
   body {
