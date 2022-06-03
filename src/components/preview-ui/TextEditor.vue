@@ -41,12 +41,20 @@ export default {
       }
       // 中间某项可能被移除了
       const id = this.list[this.list.length - 1].id + 1;
-      this.list.push({ id });
+      this.list.push({
+        id,
+        title: '标题',
+        time: '2022/06/03-2022/06/05',
+        desc: '描述',
+      });
     },
     removeItem(item) {
       const idx = this.list.indexOf(item);
 
       this.list.splice(idx, 1);
+    },
+    saveText() {
+      // 保存 list
     },
   },
 };

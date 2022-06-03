@@ -24,7 +24,7 @@
         <div class="box">
           <div class="remove" @click="removeItem(item.i)"></div>
           <div class="text">
-            <TextEditor />
+            <TextEditor :list="item.list"/>
           </div>
         </div>
       </grid-item>
@@ -60,10 +60,10 @@ export default {
       colNum: 12,
       index: 20,
       layout: [
-        { x: 0, y: 0, w: 12, h: 4, i: '0' },
-        { x: 0, y: 4, w: 12, h: 2, i: '1' },
-        { x: 0, y: 6, w: 12, h: 3, i: '2' },
-        { x: 0, y: 9, w: 12, h: 3, i: '3' },
+        { x: 0, y: 0, w: 12, h: 4, i: '0', list: [] },
+        { x: 0, y: 4, w: 12, h: 2, i: '1', list: []},
+        { x: 0, y: 6, w: 12, h: 3, i: '2', list: [] },
+        { x: 0, y: 9, w: 12, h: 3, i: '3', list: [] },
       ],
     };
   },
@@ -78,6 +78,7 @@ export default {
         w: 12,
         h: 4,
         i: this.index,
+        list: []
       });
       // Increment the counter to ensure key is always unique.
       this.index += 1;
@@ -85,6 +86,9 @@ export default {
     removeItem(val) {
       const index = this.layout.map((item) => item.i).indexOf(val);
       this.layout.splice(index, 1);
+    },
+    saveHtml() {
+      // 保存 layout 和对应的 list
     },
   },
 };
