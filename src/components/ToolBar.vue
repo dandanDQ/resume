@@ -12,6 +12,10 @@
     <div class="ui-button" @click="changeEditorList('add')">
       <img src="../assets/add.svg" />
     </div>
+
+    <div class="ui-button" @click="saveHtml">
+      saveHtml
+    </div>
     <!-- <div class="ui-button" @click="changeEditorList('next')">
       <img src="../assets/icon_next.svg" />
     </div> -->
@@ -88,6 +92,9 @@ export default {
     changeColor() {
       document.querySelector('#change-color').click();
     },
+    saveHtml() {
+      this.$emit('save-html');
+    }
   },
 };
 </script>

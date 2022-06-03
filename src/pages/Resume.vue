@@ -7,6 +7,7 @@
         @get-editor-value="saveFlag = !saveFlag"
         @export-preview="exportFlag = !exportFlag"
         @change-preview="previewFlag = !previewFlag"
+        @save-html="saveHtml"
         :editorList="editorList"
         :current="current"/>
       <editor :current="current" :saveFlag="saveFlag"/>
