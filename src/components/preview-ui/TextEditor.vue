@@ -7,10 +7,16 @@
     <div v-for="item in list" :key="item.id" class="item">
       <div v-if="editMode" class="remove" @click="removeItem(item)">-</div>
       <div class="second-title">
-        <div class="name" contenteditable="true">{{ item.title }}</div>
-        <div class="time" contenteditable="true">{{ item.time }}</div>
+        <div class="name" contenteditable="true">
+          {{ item.title }}
+        </div>
+        <div class="time" contenteditable="true">
+          {{ item.time }}
+        </div>
       </div>
-      <div class="desc" contenteditable="true">{{ item.desc }}</div>
+      <div class="desc" contenteditable="true">
+        {{ item.desc }}
+      </div>
     </div>
   </div>
 </template>
@@ -22,11 +28,20 @@ export default {
       type: Boolean,
       default: true,
     },
+    preList: {
+      type: Array,
+      default() {
+        return [];
+      },
+    },
   },
   data() {
     return {
       list: [],
     };
+  },
+  created() {
+    this.list = this.preList;
   },
   methods: {
     addItem() {
@@ -53,8 +68,18 @@ export default {
 
       this.list.splice(idx, 1);
     },
-    saveText() {
+    getList() {
+      console.log('getList');
+      // 将每个 html 中的内容保存到 list 中
+      const copyList = [];
+
+      this.list.forEach((item) => {
+        copyList.push({
+          title: this.$refs[`title-${item.i}`].innerText,
+        });
+      });
       // 保存 list
+      return copyList;
     },
   },
 };

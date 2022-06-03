@@ -1,6 +1,6 @@
 <template>
   <div class="preview-template-01">
-    <div class="add" @click="addItem"></div>
+    <div v-if="editMode" class="add" @click="addItem">+</div>
     <grid-layout
       v-model:layout.async="layout"
       :col-num="12"
@@ -22,9 +22,16 @@
         :i="item.i"
       >
         <div class="box">
-          <div class="remove" @click="removeItem(item.i)"></div>
+          <div v-if="editMode" class="remove" @click="removeItem(item.i)">
+            -
+            {{ `text-${item.i}` }}
+          </div>
           <div class="text">
-            <TextEditor :list="item.list" :editMode="editMode"/>
+            <TextEditor
+              :ref="`text-${item.i}`"
+              :pre-list="item.list"
+              :edit-mode="editMode"
+            />
           </div>
         </div>
       </grid-item>
@@ -33,13 +40,14 @@
 </template>
 <script>
 import VueGridLayout from 'vue3-grid-layout';
-import TextEditor from '@/components/preview-ui/TextEditor.vue'
+import TextEditor from '@/components/preview-ui/TextEditor.vue';
+
 export default {
   name: 'PreviewTemplate03',
   components: {
     GridLayout: VueGridLayout.GridLayout,
     GridItem: VueGridLayout.GridItem,
-    TextEditor
+    TextEditor,
   },
   props: {
     preview: {
@@ -59,40 +67,49 @@ export default {
       default: true,
     },
   },
+
   data() {
     return {
-      colNum: 12,
-      index: 20,
-      layout: [
-        { x: 0, y: 0, w: 12, h: 4, i: '0', list: [] },
-        { x: 0, y: 4, w: 12, h: 2, i: '1', list: []},
-        { x: 0, y: 6, w: 12, h: 3, i: '2', list: [] },
-        { x: 0, y: 9, w: 12, h: 3, i: '3', list: [] },
-      ],
+      layout: [],
     };
+  },
+  created() {
+    this.layout = JSON.parse(
+      window.localStorage.getItem('resume-layout') || [],
+    );
   },
   methods: {
     addItem() {
-      // Add a new item. It must have a unique key!
-      const sumY = this.layout.reduce((accu, item) => accu + item.h, this.layout[0]?.y ?? 0);
-      console.log(sumY);
+      // 取当前最大的y坐标值
+      let nextY = 0;
+      let i = 0;
+      this.layout.forEach((item) => {
+        nextY = Math.max(item.y + item.h, nextY);
+        i = item.i + 1;
+      });
+
       this.layout.push({
         x: 0,
-        y: sumY, // puts it at the bottom
+        y: nextY, // puts it at the bottom
         w: 12,
         h: 4,
-        i: this.index,
-        list: []
+        i,
+        list: [],
       });
       // Increment the counter to ensure key is always unique.
-      this.index += 1;
     },
     removeItem(val) {
       const index = this.layout.map((item) => item.i).indexOf(val);
       this.layout.splice(index, 1);
     },
     saveHtml() {
+      // 将 list 保存到 layout 中
+      this.layout.forEach((item) => {
+        console.log(`text-${item.i}`);
+        this.$refs[`text-${item.i}`].getList();
+      });
       // 保存 layout 和对应的 list
+      window.localStorage.setItem('resume-layout', JSON.stringify(this.layout));
     },
   },
 };
@@ -130,15 +147,9 @@ export default {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-
-    &:hover {
-      border: rgb(255, 0, 0) 1px solid;
-      color: rgb(255, 0, 0);
-      border-radius: 50%;
-    }
-    &:hover::before {
-      content: 'x'
-    }
+    border: rgb(255, 0, 0) 1px solid;
+    color: rgb(255, 0, 0);
+    border-radius: 50%;
   }
 }
 .add {
@@ -151,14 +162,8 @@ export default {
   align-items: center;
   cursor: pointer;
   z-index: 1;
-  
-  &:hover {
   border: rgb(90, 203, 248) 1px solid;
   color: rgb(90, 203, 248);
   border-radius: 50%;
-  }
-  &:hover::before {
-    content: '+';
-  }
 }
 </style>

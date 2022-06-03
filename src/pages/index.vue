@@ -51,7 +51,7 @@
       <editor :current="current" :saveFlag="saveFlag"/>
     </section>
     <section class="preview-section" id="resume-preview">
-      <component :is="comName" :preview="preview" :firstLevels="firstLevels" :editMode="editMode"></component>
+      <component :is="comName" :preview="preview" :firstLevels="firstLevels" :editMode="editMode" ref="comp"></component>
     </section>
   </article>
 </template>
@@ -96,6 +96,7 @@ export default {
     this.editorList = JSON.parse(editorString)
     window.addEventListener('beforeunload', (e) => {
       window.localStorage.setItem('editorList', JSON.stringify(this.editorList))
+      this.saveHtml()
     })
 
     this.current = this.editorList[0]
@@ -161,7 +162,7 @@ export default {
       this.comName = this.comList[this.comIdx]
     },
     saveHtml() {
-
+      this.$refs.comp.saveHtml?.()
     }
   }
 }
