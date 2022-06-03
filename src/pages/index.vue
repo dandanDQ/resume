@@ -4,24 +4,27 @@
       <title />
       <tool-bar 
         @change-editor-list="changeEditorList"
-        @get-editor-value="saveFlag = !saveFlag"
-        @export-preview="exportFlag = !exportFlag"
-        @change-preview="previewFlag = !previewFlag"
+        @get-editor-value="loadData"
+        @export-preview="onExport"
+        @change-preview="onChangePreview"
         @save-html="saveHtml"
         :editorList="editorList"
         :current="current"/>
       <editor :current="current" :saveFlag="saveFlag"/>
     </section>
-    <section class="preview-section">
-      <preview :current="current" :exportFlag="exportFlag" :previewFlag="previewFlag"/>
+    <section class="preview-section" id="resume-preview">
+      <component :is="comName" :preview="preview" :firstLevels="firstLevels"></component>
     </section>
   </article>
 </template>
 <script>
 import Editor from '@/components/Editor.vue'
-import Preview from '@/components/Preview.vue'
 import Title from '@/components/Title.vue'
 import ToolBar from '@/components/ToolBar.vue'
+
+import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas"; 
+import { comList, components}  from '@/components/utils.js'
 
 const defaulVal = `name: 填名字
 
@@ -89,11 +92,16 @@ CARD-xx经历3（可以随便添加）:
 
 export default {
   name: 'Resume',
+  computed: {
+    preview() {
+      return this.current.preview ?? {}
+    },
+  },
   components: {
     Editor,
-    Preview,
     Title,
-    ToolBar
+    ToolBar,
+    ...components,
   },
   data() {
     return {
@@ -102,7 +110,11 @@ export default {
       capacity: 6,
       saveFlag: true,
       exportFlag: true,
-      previewFlag: true
+      previewFlag: true,
+      firstLevels: {},
+      comList: comList,
+      comIdx: 0,
+      comName: 'PreviewTemplate01'
     }
   },
   created() { 
@@ -114,6 +126,13 @@ export default {
     })
 
     this.current = this.editorList[0]
+
+    this.comName = window.localStorage.getItem('comName') ?? 'PreviewTemplate01'
+    window.addEventListener('beforeunload', (e) => {
+      window.localStorage.setItem('comName', this.comName)
+    })
+
+    this.loadData()
   },
   methods: {
     changeEditorList(editor) {
@@ -144,10 +163,53 @@ export default {
         }
       }
     },
+    loadData() {
+      this.saveFlag = !this.saveFlag
+      this.$nextTick(() => {
+        this.firstLevels = {}
+        for(const key in this.preview) {
+          if(key.indexOf('CARD-') > -1) {
+            this.firstLevels[key.slice(5)] = this.preview[key]
+          }
+        }
+      })
+    },
+    onExport() {
+      const el = document.querySelector('#resume-preview')
+      html2canvas(el).then((canvas) => {
+        const  pageData = canvas.toDataURL("image/jpeg", 1.0);
+        const pdf = new jsPDF();
+        pdf.addImage(pageData, "JPEG", 0, 0, 210, 297);
+        pdf.save("a4.pdf");
+      })
+    },
+    onChangePreview() {
+      this.comIdx = (this.comIdx + 1) % this.comList.length
+      this.comName = this.comList[this.comIdx]
+    },
+    saveHtml() {
+
+    }
   }
 }
 </script>
 <style lang="scss">
+@font-face {
+  font-family: 'font1';
+  src: url(../assets/re-font.TTF);
+}
+@font-face {
+  font-family: 'dq-font';
+  src: url(../assets/ShangShou.ttf) format('truetype')
+}
+@font-face {
+  font-family: 'dq-fangtang';
+  src: url(../assets/xiaowanzi.ttf) format('truetype')
+}
+@font-face {
+  font-family: 'dq-guofengran';
+  src: url(../assets/guofengran.ttf) format('truetype')
+}
 article.resume {
   border: 1px solid grey;
   border-radius: 4px;
@@ -159,6 +221,22 @@ article.resume {
   grid-gap: 10px;
   width: 95vw;
   min-width: calc(300px + 220mm);
+  .preview-section {
+    width: 210mm;
+    min-width: 210mm;
+    height: 297mm;
+    box-shadow: none;
+    background-color: white;
+    color: #555;
+    border-radius: 4px;
+    font-size: 14px;
+    // padding: 30px;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 1px 1px black;
+    line-height: 26px;
+    font-family: 'dq-guofengran';
+    font-weight: 400;
+  }
 }
 @media print {
   body {
@@ -190,6 +268,7 @@ article.resume {
     min-width: 210mm;
     height: 297mm;
     box-shadow: none;
+    background-color: white;
   }
 }
 </style>
