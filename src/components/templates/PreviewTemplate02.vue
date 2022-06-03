@@ -126,7 +126,7 @@ export default {
       vertical-align: middle;
       padding: 16px 8px;
       color: #2f3542;
-      background-color: rgba(255, 165, 2, 1);
+      background-color: rgba(156, 136, 255, 0.3);
     }
     .infos-list {
       margin: 10px 5px;
@@ -150,8 +150,8 @@ export default {
           height: 24px;
           border-radius: 4px;
           position: relative;
-          border: #fed330 1px solid;
-          box-shadow: 1px 1px 3px #fed330;
+          border: rgba(156, 136, 255, 0.3) 1px solid;
+          box-shadow: 1px 1px 3px rgba(156, 136, 255, 0.3);
           margin: 4px;
           float: left;
           font-weight: 400;
