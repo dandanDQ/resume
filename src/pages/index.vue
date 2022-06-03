@@ -19,7 +19,7 @@
           <div class="ui-button" @click="saveHtml">
             saveHtml
           </div>
-          <div class="ui-button" @click="changeEditMode">
+          <div class="ui-button" @click="editMode = !editMode">
             edit
           </div>
           <!-- <div class="ui-button" @click="changeEditorList('next')">
@@ -51,7 +51,7 @@
       <editor :current="current" :saveFlag="saveFlag"/>
     </section>
     <section class="preview-section" id="resume-preview">
-      <component :is="comName" :preview="preview" :firstLevels="firstLevels"></component>
+      <component :is="comName" :preview="preview" :firstLevels="firstLevels" :editMode="editMode"></component>
     </section>
   </article>
 </template>
@@ -86,7 +86,8 @@ export default {
       firstLevels: {},
       comList: comList,
       comIdx: 0,
-      comName: 'PreviewTemplate01'
+      comName: 'PreviewTemplate01',
+      editMode: true,
     }
   },
   created() { 
