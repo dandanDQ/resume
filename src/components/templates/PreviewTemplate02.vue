@@ -100,6 +100,9 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+$mainColor: #9adcff;
+$skillColor: #f7e2e2;
+$nameBgColor: #e8f9fd;
 .content {
   height: 100%;
   display: grid;
@@ -112,8 +115,8 @@ export default {
     box-sizing: border-box;
     backdrop-filter: blur(10px);
     // border: 1px rgba(112, 161, 255,1.0) solid;
-    box-shadow: 0px 0px 3px rgb(112, 161, 255);
-    background-color: rgba(112, 161, 255, 0.5);
+    box-shadow: 0px 0px 3px $mainColor;
+    background-color: $mainColor;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -132,7 +135,7 @@ export default {
       vertical-align: middle;
       padding: 16px 8px;
       color: #2f3542;
-      background-color: rgba(255, 255, 255, 0.83);
+      background-color: $nameBgColor;
     }
     .infos-list {
       margin: 10px 5px;
@@ -157,8 +160,8 @@ export default {
           height: 20px;
           border-radius: 4px;
           position: relative;
-          border: rgba(156, 136, 255, 0.3) 1px solid;
-          box-shadow: 1px 1px 3px rgba(156, 136, 255, 0.3);
+          border: $skillColor 1px solid;
+          box-shadow: 1px 1px 3px $skillColor;
           margin: 4px;
           font-weight: 400;
           .skill-name {
@@ -178,7 +181,7 @@ export default {
             right: 0;
             bottom: 0;
             height: 100%;
-            background-color: rgba(156, 136, 255, 0.3);
+            background-color: $skillColor;
           }
         }
         .skill-desc {
@@ -203,8 +206,8 @@ export default {
       padding: 10px;
       // border: 1px solid #5698c3;
       border-radius: 8px;
-      border: 1px solid rgba(112, 161, 255, 0.6);
-      box-shadow: 2px 2px 2px rgba(112, 161, 255, 0.5);
+      border: 1px solid $mainColor;
+      box-shadow: 2px 2px 2px $mainColor;
 
       .first-title {
         font-family: 'dq-font';
