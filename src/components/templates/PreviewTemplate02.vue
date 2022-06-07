@@ -103,6 +103,7 @@ export default {
 $mainColor: #9adcff;
 $skillColor: #e8f9fd;
 $nameBgColor: #e8f9fd;
+$borderColor: #0aa1dd;
 .content {
   height: 100%;
   display: grid;
@@ -206,8 +207,8 @@ $nameBgColor: #e8f9fd;
       padding: 10px;
       // border: 1px solid #5698c3;
       border-radius: 8px;
-      border: 1px solid $mainColor;
-      box-shadow: 2px 2px 2px $mainColor;
+      border: 1px solid $borderColor;
+      // box-shadow: 0px 0px 2px $borderColor;
 
       .first-title {
         font-family: 'dq-font';
