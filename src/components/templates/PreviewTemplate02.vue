@@ -101,7 +101,7 @@ export default {
 </script>
 <style scoped lang="scss">
 $mainColor: #9adcff;
-$skillColor: #f7e2e2;
+$skillColor: #e8f9fd;
 $nameBgColor: #e8f9fd;
 .content {
   height: 100%;
