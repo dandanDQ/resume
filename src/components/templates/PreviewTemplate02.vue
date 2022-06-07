@@ -21,11 +21,17 @@
       <div v-if="preview?.skills?.length" class="skills-block">
         <div class="title">技能概要</div>
         <div class="skills">
-          <span v-for="skill in preview.skills" :key="skill.name" class="skill">
-            <div class="level" :style="{ width: skill.level + '%' }"></div>
-            <span class="skill-name">{{ skill.name }}</span>
-          </span>
+          <div v-for="skill in preview.skills" :key="skill.name">
+            <div class="skill">
+              <div class="level" :style="{ width: skill.level + '%' }"></div>
+              <span class="skill-name">{{ skill.name }}</span>
+            </div>
+            <div class="skill-desc">{{ skill.desc }}</div>
+          </div>
         </div>
+      </div>
+      <div class="extra-block">
+        {{ preview?.extra }}
       </div>
     </article>
     <!-- cards of first level. -->
@@ -106,7 +112,7 @@ export default {
     box-sizing: border-box;
     backdrop-filter: blur(10px);
     // border: 1px rgba(112, 161, 255,1.0) solid;
-    box-shadow: 1px 1px 3px rgb(112, 161, 255);
+    box-shadow: 0px 0px 3px rgb(112, 161, 255);
     background-color: rgba(112, 161, 255, 0.5);
     border-radius: 5px;
     display: flex;
@@ -126,7 +132,7 @@ export default {
       vertical-align: middle;
       padding: 16px 8px;
       color: #2f3542;
-      background-color: rgba(156, 136, 255, 0.3);
+      background-color: rgba(255, 255, 255, 0.83);
     }
     .infos-list {
       margin: 10px 5px;
@@ -139,21 +145,21 @@ export default {
       margin-top: 24px;
       width: 240px;
       .skills {
-        width: 240px;
-        position: relative;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        justify-items: center;
+        // width: 240px;
+        // position: relative;
+        // display: grid;
+        // grid-template-columns: repeat(2, 1fr);
+        // justify-items: center;
+        padding: 5px;
 
         .skill {
-          width: 85%;
-          height: 24px;
+          width: 80%;
+          height: 20px;
           border-radius: 4px;
           position: relative;
           border: rgba(156, 136, 255, 0.3) 1px solid;
           box-shadow: 1px 1px 3px rgba(156, 136, 255, 0.3);
           margin: 4px;
-          float: left;
           font-weight: 400;
           .skill-name {
             text-align: center;
@@ -175,7 +181,14 @@ export default {
             background-color: rgba(156, 136, 255, 0.3);
           }
         }
+        .skill-desc {
+          margin-bottom: 6px;
+        }
       }
+    }
+    .extra-block {
+      text-align: justify;
+      margin: 10px;
     }
   }
 

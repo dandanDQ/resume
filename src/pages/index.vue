@@ -50,7 +50,7 @@
         </div>
       <editor :current="current" :saveFlag="saveFlag"/>
     </section>
-    <section class="preview-section" id="resume-preview">
+    <section class="preview-section" id="resume-preview" >
       <component :is="comName" :preview="preview" :firstLevels="firstLevels" :editMode="editMode" ref="comp"></component>
     </section>
   </article>
@@ -94,19 +94,17 @@ export default {
     const initVal = JSON.stringify([{ yaml: defaultVal, preview: {}}, { yaml: defaultVal, preview: {}} ])
     const editorString = window.localStorage.getItem('editorList') ?? initVal
     this.editorList = JSON.parse(editorString)
+    this.current = this.editorList[0]
+    this.comName = window.localStorage.getItem('comName') ?? 'PreviewTemplate01'
+    this.loadData()
+  },
+  mounted() {
     window.addEventListener('beforeunload', (e) => {
       window.localStorage.setItem('editorList', JSON.stringify(this.editorList))
+      window.localStorage.setItem('comName', this.comName)
       this.saveHtml()
     })
-
-    this.current = this.editorList[0]
-
-    this.comName = window.localStorage.getItem('comName') ?? 'PreviewTemplate01'
-    window.addEventListener('beforeunload', (e) => {
-      window.localStorage.setItem('comName', this.comName)
-    })
-
-    this.loadData()
+    window.addEventListener('keydown', this.loadData)
   },
   methods: {
     changeEditorList(editor) {
